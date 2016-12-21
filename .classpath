@@ -3,12 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="D:/lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSON Libraries"/>
 	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_7.0"/>
 	<classpathentry kind="lib" path="D:/lib/Project_Lib/bigdata Libraries/mysql-connector-java-5.1.27.jar"/>
 	<classpathentry kind="lib" path="D:/lib/commons-lang3-3.4.jar"/>
-	<classpathentry kind="lib" path="/migration/WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSON Libraries"/>
+	<classpathentry kind="lib" path="D:/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/lib/log4j-api-2.7.jar"/>
 	<classpathentry kind="lib" path="D:/lib/log4j-core-2.7.jar"/>
-	<classpathentry kind="lib" path="D:/lib/log4j-api-2.7.jar" sourcepath="D:/lib/Binary and Source/apache-log4j-2.7-bin/log4j-api-2.7-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
