@@ -18,15 +18,30 @@ public class MapUtils {
 	 * @return
 	 */
 	public static HashMap Map2HashMap(Map map){
+		HashMap hashMap = new HashMap(map.size()+ map.size()/2);
 		
 		Iterator it = map.keySet().iterator();
-		HashMap hashMap = new HashMap(map.size()+ map.size()/2);
 		
 		while(it.hasNext()){
 			Object k = it.next();
 			hashMap.put(k, map.get(k) );
 		}
 		return hashMap;
+	}
+	/**
+	 * map reverse
+	 * @param map
+	 * @return
+	 */
+	public static Map reverse(Map map){
+		Map map2 = new HashMap(map.size()+ map.size()/2);
+
+		Iterator it = map.keySet().iterator();
+		while(it.hasNext()){
+			Object k = it.next();
+			map2.put(map.get(k), k  );
+		}
+		return map2;
 	}
 	
 	public static void main(String args[]){

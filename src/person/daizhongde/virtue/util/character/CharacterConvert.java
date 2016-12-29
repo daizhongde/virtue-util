@@ -1,11 +1,15 @@
 package person.daizhongde.virtue.util.character;
 
+import org.apache.log4j.Logger;
+
 /**
  * 
  * @author dzd
  * @modify 20130904 method to static
  */
 public class CharacterConvert{
+	private static Logger log = Logger.getLogger(CharacterConvert.class);
+	
 	public static String getStr(String s){
 	    String str="";
 	  	try{
@@ -95,7 +99,24 @@ public class CharacterConvert{
 		  		for(int i =0; i<arr.length; i++){
 		  			for(int j =0; j<arr.length; j++){
 		  				str= new String(s.getBytes(arr[i]),arr[j]);
-		  				System.out.println(i+j+":"+arr[i]+" to "+arr[j]+" -->"+str);
+		  				System.out.println(i+"-"+j+":"+arr[i]+" to "+arr[j]+" -->"+str);
+		  			}
+		  		}
+		  		
+		  	}catch(Exception e){
+		  		e.printStackTrace();
+		  	}
+		  	return str;
+	}
+	
+	public static String testCharSet(String s, String level){
+		String[] arr = {"GBK","UTF-8","ISO-8859-1"};
+		 String str="";
+		  	try{
+		  		for(int i =0; i<arr.length; i++){
+		  			for(int j =0; j<arr.length; j++){
+		  				str= new String(s.getBytes(arr[i]),arr[j]);
+		  				log.error(i+"-"+j+":"+arr[i]+" to "+arr[j]+" -->"+str);
 		  			}
 		  		}
 		  		
