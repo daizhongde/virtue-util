@@ -5,5 +5,5 @@ import org.apache.logging.log4j.Logger;
 
 public class BaseLog2 {
 	/** 取得日志记录器Logger */	
-	static Logger log = LogManager.getLogger( BaseLog2.class.getName());
+	private static Logger log = LogManager.getLogger( BaseLog2.class.getName());
 }

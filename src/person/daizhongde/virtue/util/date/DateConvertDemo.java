@@ -4,11 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DateConvertDemo {
 
-	private Logger log = Logger.getLogger(this.getClass());
+	private static Logger log = LogManager.getLogger(DateConvertDemo.class.getName());
 
 	/**
 	 * 日期转换成字符串

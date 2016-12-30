@@ -7,11 +7,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DateFormatUtil {
 
-	private Logger log = Logger.getLogger(this.getClass());
+	private static Logger log = LogManager.getLogger(DateFormatUtil.class.getName());
 
 	/**
 	 * java.sql.Timestamp->String 2011-07-02 22:19:06.015 -> 2011年07月02日 22:45

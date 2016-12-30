@@ -9,15 +9,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BaseDao {
 
-	private Logger logger = Logger.getLogger(BaseDao.class);
+	/** 取得日志记录器Logger */
+	private static Logger log = LogManager.getLogger( BaseDao.class.getName());
 	
 	// 查询多个记录
 	protected Vector selectSomeNote(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = new Vector();// 创建结果集向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -52,7 +54,7 @@ public class BaseDao {
 	 * @return
 	 */
 	protected Map selectMapValue(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Map map = new HashMap();// 创建查询结果集向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -73,14 +75,14 @@ public class BaseDao {
 	
 	// 查询单个记录--如果查询结果有多条就返回最后一条
 	protected Vector selectOnlyNote(String sql) throws SQLException{
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		Connection conn = JDBC.getConnection();// 获得数据库连接
 //		try {
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			
-//			logger.info("Statement MaxRows:"+stmt.getMaxRows());  //0没有限制
+//			log.info("Statement MaxRows:"+stmt.getMaxRows());  //0没有限制
 			int columnCount = rs.getMetaData().getColumnCount();// 获得表格列数
 			while (rs.next()) {
 				vector = new Vector();// 创建记录向量
@@ -97,7 +99,7 @@ public class BaseDao {
 	}
 	//查询多个值--如果结果有多行，则vector包括第一列的所有值length = 行数
 	protected Vector selectSomeValue(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = new Vector();// 创建查询结果集向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -116,7 +118,7 @@ public class BaseDao {
 
 	// 查询单个值
 	protected Object selectOnlyValue(String sql) throws SQLException{
-		logger.debug(sql);
+		log.debug(sql);
 		Object value = null;// 声明查询结果对象
 		Connection conn = JDBC.getConnection();// 获得数据库连接
 //		try {
@@ -139,7 +141,7 @@ public class BaseDao {
 	 * @return
 	 */
 	protected Vector selectColumnLabels(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -169,7 +171,7 @@ public class BaseDao {
 	 * @return
 	 */
 	protected Vector selectColumnNames(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -198,7 +200,7 @@ public class BaseDao {
 	 * @return
 	 */
 	protected Vector selectColumnTypes(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -227,7 +229,7 @@ public class BaseDao {
 	 * @return
 	 */
 	protected Vector selectColumnTypeNames(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -256,7 +258,7 @@ public class BaseDao {
 	 * @return Vector[]
 	 */
 	protected Vector[] selectColumnNamesAndTypes(String sql) {
-		logger.debug(sql);
+		log.debug(sql);
 		Vector[] vector =  new Vector[6];// 声明记录向量
 		try {
 			Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -314,7 +316,7 @@ public class BaseDao {
 	
 	// 插入、修改、删除记录
 	protected boolean longHaul(String sql) throws SQLException{
-		logger.debug(sql);
+		log.debug(sql);
 		boolean isLongHaul = true;// 默认持久化成功
 		Connection conn = JDBC.getConnection();// 获得数据库连接
 		SQLException e3 = null;

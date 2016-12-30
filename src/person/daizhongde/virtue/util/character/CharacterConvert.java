@@ -1,6 +1,7 @@
 package person.daizhongde.virtue.util.character;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 
@@ -8,7 +9,7 @@ import org.apache.log4j.Logger;
  * @modify 20130904 method to static
  */
 public class CharacterConvert{
-	private static Logger log = Logger.getLogger(CharacterConvert.class);
+	private static Logger log = LogManager.getLogger(CharacterConvert.class.getName());
 	
 	public static String getStr(String s){
 	    String str="";
