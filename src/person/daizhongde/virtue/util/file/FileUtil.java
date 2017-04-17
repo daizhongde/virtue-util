@@ -2,9 +2,12 @@ package person.daizhongde.virtue.util.file;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.SortedSet;
 
-import person.daizhongde.virtue.util2.Printer;
+import person.daizhongde.virtue.util.test.Printer;
 
 public class FileUtil {
 
@@ -63,7 +66,7 @@ public class FileUtil {
 				return filename.substring(dot + 1);
 			}
 		}
-		return filename;
+		return "";
 	}
 
 	/**
@@ -242,6 +245,20 @@ public class FileUtil {
 		}
 		return is;
 	}
+
+	private byte[] readInstream(InputStream inputStream) throws Exception {
+		ByteArrayOutputStream byteArrayOutPutStream = new ByteArrayOutputStream();// 创建ByteArrayOutputStream类
+		byte[] buffer = new byte[1024];// 声明缓存区
+		int length = -1;// 定义读取的默认长度
+		while ((length = inputStream.read(buffer)) != -1) {
+			byteArrayOutPutStream.write(buffer, 0, length);// 把缓存区中的输入到内存中
+		}
+		byteArrayOutPutStream.close();// 关闭输入流
+		inputStream.close();// 关闭输入流
+
+		return byteArrayOutPutStream.toByteArray();// 返回这个输入流的字节数组
+	}
+	 
 	
 	public static String getFilePath(String file){
 			String absPath = "";
@@ -319,6 +336,40 @@ public class FileUtil {
 //		Printer.printJSON(a);
 		Printer.printJSON(l);
 	}
+    /**
+     * DOC 写入信息.
+     * 
+     * @throws IOException
+     */
+    public static void write2File(InputStream is, String path ) throws IOException {
+//    	StreamReader sr = new StreamReader( 你的Stream );
+    	File file = new File(path);
+    	FileOutputStream fos = new FileOutputStream(file);
+    	byte[] b = new byte[1024];
+    	while((is.read(b)) != -1){
+    	fos.write(b);
+    	}
+    	is.close();
+    	fos.close();
+    }
+    /**
+     * String 写入信息.
+     * 
+     * @throws IOException
+     */
+    public static void write2File(String data, String path ) throws IOException {
+//    	StreamReader sr = new StreamReader( 你的Stream );
+    	File file = new File(path);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		// true = append file
+		FileWriter fileWritter = new FileWriter(path, true);
+		BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+		bufferWritter.write(data);
+		bufferWritter.close();
+		fileWritter.close();
+    }
 	/**
 	 * @param args
 	 */

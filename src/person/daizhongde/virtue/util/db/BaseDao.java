@@ -1,10 +1,12 @@
 package person.daizhongde.virtue.util.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -18,7 +20,7 @@ public class BaseDao {
 	private static Logger log = LogManager.getLogger( BaseDao.class.getName());
 	
 	// 查询多个记录
-	protected Vector selectSomeNote(String sql) {
+	public Vector selectSomeNote(String sql) {
 		log.debug(sql);
 		Vector vector = new Vector();// 创建结果集向量
 		try {
@@ -74,7 +76,7 @@ public class BaseDao {
 	}
 	
 	// 查询单个记录--如果查询结果有多条就返回最后一条
-	protected Vector selectOnlyNote(String sql) throws SQLException{
+	public Vector selectOnlyNote(String sql) throws SQLException{
 		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -97,8 +99,8 @@ public class BaseDao {
 //		}
 		return vector;// 返回记录向量
 	}
-	//查询多个值--如果结果有多行，则vector包括第一列的所有值length = 行数
-	protected Vector selectSomeValue(String sql) {
+	//查询多个值(某列的值)--如果结果有多行，则vector包括第一列的所有值.length = 行数
+	public  Vector selectSomeValue(String sql) {
 		log.debug(sql);
 		Vector vector = new Vector();// 创建查询结果集向量
 		try {
@@ -117,7 +119,7 @@ public class BaseDao {
 	}
 
 	// 查询单个值
-	protected Object selectOnlyValue(String sql) throws SQLException{
+	public Object selectOnlyValue(String sql) throws SQLException{
 		log.debug(sql);
 		Object value = null;// 声明查询结果对象
 		Connection conn = JDBC.getConnection();// 获得数据库连接
@@ -341,17 +343,54 @@ public class BaseDao {
 		}
 		return isLongHaul;// 返回持久化结果
 	}
+	// 插入、修改、删除记录
+	protected boolean longHaul(String sql, Object[] arr ) throws SQLException{
+		log.debug(sql);
+		boolean isLongHaul = true;// 默认持久化成功
+		Connection conn = JDBC.getConnection();// 获得数据库连接
+		SQLException e3 = null;
+		try {
+			conn.setAutoCommit(false);// 设置为手动提交
+			PreparedStatement stmt = conn.prepareStatement(sql);// 创建连接状态对象
+			for(int i=0,j=arr.length; i<j; i++){
+				if(null == arr[i]){
+					stmt.setNull(i+1,Types.INTEGER);
+				}
+				stmt.setObject(i+1, arr[i]);
+			}
+			stmt.executeUpdate();// 执行SQL语句
+			stmt.close();// 关闭连接状态对象
+			conn.commit();// 提交持久化
+		} catch (SQLException e) {
+			isLongHaul = false;// 持久化失败
+			try {
+				conn.rollback();// 回滚
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			e3 = e;
+		}
+		if(e3 != null){
+			throw e3;
+		}
+		return isLongHaul;// 返回持久化结果
+	}
 	// 插入记录
-	protected boolean insert(String sql) throws SQLException {
+	public boolean insert(String sql) throws SQLException {
 		return longHaul(sql);
 	}
-
+	// 插入记录
+	public boolean insert(String sql, Object[] arr ) throws SQLException {
+		return longHaul(sql, arr);
+	}
+	
 	// 修改记录
-	protected boolean update(String sql) throws SQLException{
+	public boolean update(String sql) throws SQLException{
 		return longHaul(sql);
 	}
 	// 删除记录
-	protected boolean delete(String sql) throws SQLException {
+	public boolean delete(String sql) throws SQLException {
 		return longHaul(sql);
 	}
 

@@ -23,7 +23,18 @@ public class DateConvertDemo {
 		String str = format.format(date);
 		return str;
 	}
+	/**
+	 * 日期转换成字符串
+	 * 
+	 * @param date
+	 * @return str
+	 */
+	public static String DateToStr2(Date date) {
 
+		SimpleDateFormat format = new SimpleDateFormat("yy-M-d HH:mm:ss:SSS");
+		String str = format.format(date);
+		return str;
+	}
 	/**
 	 * 字符串转换成日期
 	 * 

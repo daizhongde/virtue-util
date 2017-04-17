@@ -70,7 +70,7 @@ public class JDBC {
 	
 	public static Connection getConnection() throws SQLException {// 创建数据库连接的方法
 		Connection conn = (Connection)threadLocal.get();// 从线程中获得数据库连接
-		if (conn == null) {// 没有可用的数据库连接
+		if (conn == null || conn.isClosed() ) {// 没有可用的数据库连接
 //			try {
 //				if(ConfigConstant.driver == null || ConfigConstant.driver.trim().equalsIgnoreCase("")){
 //					OracleDataSource ds;
@@ -94,10 +94,11 @@ public class JDBC {
 	public static boolean closeConnection() {// 关闭数据库连接的方法
 		boolean isClosed = true;// 默认关闭成功
 		Connection conn = (Connection)threadLocal.get();// 从线程中获得数据库连接
-		if (conn != null) {// 数据库连接可用
+		if (conn != null ) {// 数据库连接可用
 			threadLocal.set(null);// 清空线程中的数据库连接
 			try {
-				conn.close();// 关闭数据库连接
+				if(conn.isClosed() );
+				else{ conn.close();}// 关闭数据库连接
 			} catch (SQLException e) {
 				isClosed = false;// 关闭失败
 				e.printStackTrace();
