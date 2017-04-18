@@ -8,6 +8,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import person.daizhongde.virtue.util.test.Printer;
+
 public class SystemProperties {
 	public static void main(String args[]) throws UnknownHostException, SocketException {
 		String key="";
