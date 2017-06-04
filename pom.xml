@@ -1,10 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>virtue-util</groupId>
+  <groupId>person.daizhongde.virtue.util</groupId>
   <artifactId>virtue-util</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>virtue</name>
+  <name>virtue-util</name>
   <description>virtue-util support jdk1.7+</description>
+  <url>http://maven.apache.org</url>
   
       <properties>
         <JDK.version>1.8</JDK.version>
