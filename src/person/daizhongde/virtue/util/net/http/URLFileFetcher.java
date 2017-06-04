@@ -87,8 +87,8 @@ public class URLFileFetcher {
 		java.net.HttpURLConnection conn2 = (java.net.HttpURLConnection) url2.openConnection();
 		conn2.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0");
 		try {
-			conn2.setConnectTimeout(12*1000);
-			conn2.setReadTimeout(80*1000);
+			conn2.setConnectTimeout(8*1000);
+			conn2.setReadTimeout(45*1000);
 			
 //			propertys.put("Connection", "close");
 //			propertys.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0");
