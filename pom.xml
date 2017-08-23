@@ -38,7 +38,7 @@
         <commons-net.version>3.6</commons-net.version>
         
         <!-- below two jar is not on the net -->
-        <dom4j.version>1.6.1</dom4j.version>
+        <dom4j.version>2.0.1</dom4j.version>
         <mysql-connector-java.version>5.1.41</mysql-connector-java.version>
     </properties>
     
@@ -169,6 +169,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5</version><!-- 2.3.2  3.3 3.5  3.6.2 -->
         <configuration>
           <source>1.8</source>
           <target>1.8</target>

@@ -17,15 +17,12 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.net.tftp.TFTP;
-import org.apache.commons.net.tftp.TFTPClient;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.Connection.Method;
 
 import person.daizhongde.virtue.util.file.FileNameUtil;
 import person.daizhongde.virtue.util.file.FileUtil;
-import person.daizhongde.virtue.util.net.TFTPUtil;
-import person.daizhongde.virtue.util.test.Printer;
 
 public class URLFileFetcher {
 	/**
@@ -289,80 +286,7 @@ public class URLFileFetcher {
 			
 		}
 	}
-	/**
-	 * 下载视频文件
-	 * <p>
-	 * sun.net.www.protocol.ftp.FtpURLConnection 实现
-	 * available
-	 */
-	public Object[] fetcherVideoByFTP(String url, String localPath, 
-			Map<String, Object> propertys, long q , String extName) throws Exception{
-		
-		System.out.println("开始下载：url:"+url+",localPath:"+localPath);
-		if(localPath.indexOf(".")!=-1){
-			extName = FileUtil.getExtensionName(localPath);
-		}
-		
-		String absDirectory_dest = localPath.substring(0, localPath.lastIndexOf("/"));
-		File dest_dir = new File( absDirectory_dest );
-		if(!dest_dir.exists()){
-			/* 创建文件夹 */
-			dest_dir.mkdirs();
-		}
-		
-		URL url2 = new URL(url);
-		sun.net.www.protocol.ftp.FtpURLConnection conn2 = (sun.net.www.protocol.ftp.FtpURLConnection) url2.openConnection();
-		conn2.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0");
-		try {
-			conn2.setConnectTimeout(12*1000);
-			conn2.setReadTimeout(80*1000);
 
-//			propertys.put("Connection", "close");
-//			propertys.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0");
-//			conn2.setDoInput(false);//设置是否从httpUrlConnection读入，默认情况下是true;              
-//			conn2.setRequestMethod("GET");
-			
-			if (propertys != null)
-				for (String key : propertys.keySet()) {
-					conn2.addRequestProperty(key, String.valueOf(propertys.get(key)));
-				}
-			conn2.connect();
-			
-			String contentType = conn2.getContentType();
-//			int responseCode = conn2.getResponseCode();
-//			if( responseCode != 200 ){
-			int contentlength = conn2.getContentLength();
-			System.out.println("contentlength:"+contentlength);
-//			if( contentlength == 0 ){
-//				throw new RuntimeException("下载电影文件时出错！url:"+url);
-//			}
-			
-			InputStream inputStream = conn2.getInputStream();//得到服务器端传回来的数据，相对客户端为输入流
-
-            byte[] data = readInstream(inputStream);
-            File file = new File( localPath );
-            FileOutputStream outputStream = new FileOutputStream(file);
-            outputStream.write(data);
-            outputStream.close(); 
-            
-            
-//			InputStream inStream = conn2.getInputStream();//通过输入流获取图片数据  
-//			BufferedImage image = ImageIO.read(conn2.getInputStream() );
-			//[0]size, [1]width, [2]heigth, arr[3]:文件扩展名  arr[4]：文件mime_type
-//			Object[] arr = { image.getData().getDataBuffer().getSize(), image.getWidth(), image.getHeight(),"","" };
-//			arr[4] = contentType;
-            Object[] arr = { "", "", "","","" };
-
-			return arr;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if (conn2 != null)
-				conn2.close();
-		}
-	}
-	
 	/**
 	 * 下载视频文件
 	 * available
