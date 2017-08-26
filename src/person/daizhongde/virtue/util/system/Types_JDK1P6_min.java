@@ -1,7 +1,18 @@
-package person.daizhongde.virtue.util2;
+package person.daizhongde.virtue.util.system;
 
 public class Types_JDK1P6_min {
-
+	//input type 
+	/*
+	 * text      1  
+	 * textarea  2
+	 * combobox  3
+	 * date      91
+	 * time      92
+	 * datetime  93
+	 * clob      2005
+	 * 
+	 * 
+	 * */
 		public final static int BIT             =  -7;
 		public final static int TINYINT         =  -6;
         public final static int SMALLINT        =   5;

@@ -40,6 +40,7 @@
         <!-- below two jar is not on the net -->
         <dom4j.version>2.0.1</dom4j.version>
         <mysql-connector-java.version>5.1.41</mysql-connector-java.version>
+        <mail.version>1.4.7</mail.version>
     </properties>
     
   <dependencies>
@@ -117,8 +118,14 @@
             <artifactId>spring-context</artifactId>  
             <version>${spring.version}</version>  
             <type>jar</type>  
-        </dependency>  
-  
+        </dependency>
+        <!-- 发邮件客户端 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+
         <dependency>  
             <groupId>org.springframework</groupId>  
             <artifactId>spring-core</artifactId>  
@@ -154,6 +161,11 @@
 		    <version>${hibernate.version}</version>
 		</dependency>
 		 -->
+		 <dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>${mail.version}</version>
+		</dependency>
   </dependencies>
   
   <build>

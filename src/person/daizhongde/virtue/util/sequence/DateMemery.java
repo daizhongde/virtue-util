@@ -1,4 +1,4 @@
-package person.daizhongde.virtue.util.date;
+package person.daizhongde.virtue.util.sequence;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

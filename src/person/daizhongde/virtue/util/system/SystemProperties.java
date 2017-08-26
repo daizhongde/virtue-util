@@ -1,4 +1,4 @@
-package person.daizhongde.virtue.util2;
+package person.daizhongde.virtue.util.system;
 
 import java.io.File;
 import java.net.SocketException;
