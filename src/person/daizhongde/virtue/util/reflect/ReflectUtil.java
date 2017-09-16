@@ -12,6 +12,20 @@ public class ReflectUtil {
         
         return m.invoke(obj); 
 	}
+
+	public static Object reflectStartMethod(String className,
+			String methodName, Object[] methodParameters,
+			Class[] parameterClasses) throws Exception {
+		Object result = null;
+		Class cls = Class.forName(className);
+
+		Object obj = cls.newInstance();
+
+		Method method = obj.getClass().getMethod(methodName, parameterClasses);
+
+		result = method.invoke(obj, methodParameters);
+		return result;
+	}
 	/**
 	 * 
 	 * @param className eg:"org.test.GetClass"
