@@ -11,7 +11,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import person.daizhongde.virtue.util.db.JDBC;
 import person.daizhongde.virtue.util.jdbc.MTCellValue;
@@ -20,7 +21,7 @@ import person.daizhongde.virtue.util.jdbc.MTSQLRunnable;
 
 public class DaoImpl {
 
-	private static Logger log = Logger.getLogger(DaoImpl.class);
+	private static Logger log = LogManager.getLogger(DaoImpl.class);
 	private static final String MySQL_driver = "com.mysql.jdbc.Driver";
 	private static final String Oracle_driver = "oracle.jdbc.driver.OracleDriver";
 	private static final String url = "jdbc:mysql://localhost:3306/tool?user=root&password=123";

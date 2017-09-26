@@ -78,6 +78,7 @@ public class DateFormatUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("11\n11");
 		SimpleDateFormat stm = new SimpleDateFormat(
 				"yyyy年MM月dd日 HH时mm分ss秒.S毫秒 E");
 		SimpleDateFormat stm1 = new SimpleDateFormat("yy年MM月dd日 HH时mm分ss秒 E");

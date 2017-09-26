@@ -7,11 +7,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class MTConnectionPool {
-	private Logger log = Logger.getLogger(MTConnectionPool.class);
+	private Logger log = LogManager.getLogger(MTConnectionPool.class);
 	
 	private String url;
 	private String driver;

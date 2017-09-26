@@ -502,7 +502,7 @@ public class MySQLColumnType extends BaseDao{
 	public static void main(String args[]) throws Exception{
 		MySQLColumnType t = new MySQLColumnType();
 		//cpab gzpost tool
-		String owner = "test";
+		String owner = "tool";
 /* mig_com_ins            mig_control_info  mig_control_template  mig_job_content  mig_job_info
    mig_job_info            mig_job_ins      mig_job_process       mig_job_stat     mig_load_map  
    mig_auditc_consistency   mig_auditc_report_detail_result
@@ -520,7 +520,7 @@ ColumnType.t_gb_tob_status = {};
 ColumnType.t_gb_tobacco = {};
 */
 
-		String tableName = "t_gb_tobacco";//for comment query
+		String tableName = "mig_ins_quartz";//for comment query
 		String tableNameWithUSER = owner+"."+tableName;//for data query  eg:"cpab.TB_PAYER_COMMI_INFO"
 	
 		String sql = "select * from "+tableNameWithUSER;
