@@ -13,7 +13,93 @@ public class MySQLColumnType extends BaseDao{
 	private String sql_2 = "select * from t_columntype";
 	//sql_mysql
 	private String sql_3 = "select * from t_columntype";
+	
+	
+	public static void main(String args[]) throws Exception{
+		MySQLColumnType t = new MySQLColumnType();
+		//cpab gzpost tool
+		String owner = "test";
+//t_q_main   t_q_detail  
+		String tableName = "t_hospital";//for comment query
+		String tableNameWithUSER = owner+"."+tableName;//for data query  eg:"cpab.TB_PAYER_COMMI_INFO"
+	
+		String sql = "select * from "+tableNameWithUSER;
+//		String sql = "SELECT CAST(COUNT(*) AS UNSIGNED) num FROM tool.t_authority_user t2 WHERE t2.supervisor_id=1";
+//		String sql = FileUtil.readString4("D:/daizd/Workspaces/MyEclipse 2015 CI/virtue-util/src/person/daizhongde/virtue/util/db/select.sql");
 		
+//		String CommentSQL = "select column_name,comments from user_col_comments where table_name=upper('"+tableName+"')";
+		
+		String CommentSQL = "select column_name,column_comment " +
+				"			   from INFORMATION_SCHEMA.COLUMNS " +
+				"             where TABLE_SCHEMA=upper('"+owner+"') and table_name=upper('"+tableName+"')";
+		
+		Vector[] v =  t.sColumnNamesAndTypes( sql );
+
+		
+		//v.length == 6   
+//		v[0]:ColumnLabel         v[1]:ColumnName      
+//		v[2]:ColumnType          v[3]:ColumnTypeName      
+//		v[4]:Precision 有效位数 ,精度      v[5]: Scale 小数点后位数
+//		for(int m=0, n=v.length; m<n; m++){
+//			Vector v2 =  v[m];
+//			for(int i=0, j=v2.size(); i<j; i++){
+//				System.out.print("("+i+") "+v2.get(i)+"  |");
+//			}
+//			System.out.println("");
+//		}
+
+		Vector ColumnLabel =  v[0];
+		Vector ColumnName =  v[1];
+		Vector ColumnType =  v[2];
+		Vector ColumnTypeName =  v[3];
+		Vector Precision =  v[4];
+		Vector Scale =  v[5];
+		
+//		print(ColumnLabel);	print(ColumnName);
+		print(ColumnType);	
+//		print(ColumnTypeName);
+//		print(Precision);	print(Scale);
+		
+//		printDefaultColumns(ColumnLabel);	
+		
+//		printMap(ColumnLabel,ColumnLabel);	printMap(ColumnLabel,ColumnName);
+		printMap(ColumnLabel,ColumnType);	
+//		printMap(ColumnLabel,ColumnTypeName);
+//		printMap(ColumnLabel,Precision);	printMap(ColumnLabel,Scale);
+
+		Map Comment = t.selectMapValue(CommentSQL); 
+		
+//		printMap(ColumnLabel,ColumnType,Precision,Scale);
+//		printMap(ColumnLabel,ColumnType,Precision,Scale,ColumnTypeName);
+		
+		Vector front = new Vector();
+		Vector back = new Vector();
+		
+		/*  for field use-- Copycat */
+		printFieldMapCopycat(ColumnLabel,
+				ColumnType,ColumnTypeName,Precision,Scale,Comment,
+				front, back );
+		
+		/*  for field use-- Standard */
+//		printFieldMap(ColumnLabel,
+//				ColumnType,ColumnTypeName,Precision,Scale,Comment,
+//				front,back );
+		
+		
+		/*  for export use */
+		printExportMap(ColumnLabel,ColumnType,Precision,Scale,ColumnTypeName, Comment);
+		
+		//no column alias
+		printSelectSQLNoTBAlias1(ColumnName, owner+"."+tableName);
+		printSelectSQLWithTBAlias1(ColumnName, owner+"."+tableName);
+		
+		//with column alias
+		System.out.println("\nbelow sql with column alias:");
+//		printSelectSQLWithColAliasNotableAlias(ColumnName, owner+"."+tableName);
+		printSelectSQLWithColAliasCopycat1(ColumnName, owner+"."+tableName);
+		printSelectSQLWithColAlias1(ColumnName, owner+"."+tableName);
+			
+	}
 	public  Vector[] sColumnNamesAndTypes() {
 //		return selectOnlyNote("select * from [db_MoneyManage].[dbo].[tb_authority_user] where n_id="
 //				+ recordNum);
@@ -498,106 +584,5 @@ public class MySQLColumnType extends BaseDao{
 		
 		System.out.println("#### (SQL config)  Query.query.NativeSQL With Column Alias ####:\n"+sb);
 	}
-	
-	public static void main(String args[]) throws Exception{
-		MySQLColumnType t = new MySQLColumnType();
-		//cpab gzpost tool
-		String owner = "tool";
-/* mig_com_ins            mig_control_info  mig_control_template  mig_job_content  mig_job_info
-   mig_job_info            mig_job_ins      mig_job_process       mig_job_stat     mig_load_map  
-   mig_auditc_consistency   mig_auditc_report_detail_result
-   mig_auditf_detail_result   mig_auditf_main   mig_auditf_main_result   mig_auditf_sub
-   mig_auditv_config   	mig_auditv_result 	mig_task_config
 
-ColumnType.t_gb_organization = {};
-ColumnType.t_gb_sale_type = {};
-ColumnType.t_gb_tob_brand = {};
-ColumnType.t_gb_tob_carrier = {};
-ColumnType.t_gb_tob_flavors = {};
-ColumnType.t_gb_tob_package = {};
-ColumnType.t_gb_tob_price = {};
-ColumnType.t_gb_tob_status = {};
-ColumnType.t_gb_tobacco = {};
-*/
-
-		String tableName = "mig_ins_quartz";//for comment query
-		String tableNameWithUSER = owner+"."+tableName;//for data query  eg:"cpab.TB_PAYER_COMMI_INFO"
-	
-		String sql = "select * from "+tableNameWithUSER;
-//		String sql = "SELECT CAST(COUNT(*) AS UNSIGNED) num FROM tool.t_authority_user t2 WHERE t2.supervisor_id=1";
-//		String sql = FileUtil.readString4("D:/daizd/Workspaces/MyEclipse 2015 CI/virtue-util/src/person/daizhongde/virtue/util/db/select.sql");
-		
-//		String CommentSQL = "select column_name,comments from user_col_comments where table_name=upper('"+tableName+"')";
-		
-		String CommentSQL = "select column_name,column_comment " +
-				"			   from INFORMATION_SCHEMA.COLUMNS " +
-				"             where TABLE_SCHEMA=upper('"+owner+"') and table_name=upper('"+tableName+"')";
-		
-		Vector[] v =  t.sColumnNamesAndTypes( sql );
-
-		
-		//v.length == 6   
-//		v[0]:ColumnLabel         v[1]:ColumnName      
-//		v[2]:ColumnType          v[3]:ColumnTypeName      
-//		v[4]:Precision 有效位数 ,精度      v[5]: Scale 小数点后位数
-//		for(int m=0, n=v.length; m<n; m++){
-//			Vector v2 =  v[m];
-//			for(int i=0, j=v2.size(); i<j; i++){
-//				System.out.print("("+i+") "+v2.get(i)+"  |");
-//			}
-//			System.out.println("");
-//		}
-
-		Vector ColumnLabel =  v[0];
-		Vector ColumnName =  v[1];
-		Vector ColumnType =  v[2];
-		Vector ColumnTypeName =  v[3];
-		Vector Precision =  v[4];
-		Vector Scale =  v[5];
-		
-//		print(ColumnLabel);	print(ColumnName);
-//		print(ColumnType);	
-//		print(ColumnTypeName);
-//		print(Precision);	print(Scale);
-		
-//		printDefaultColumns(ColumnLabel);	
-		
-//		printMap(ColumnLabel,ColumnLabel);	printMap(ColumnLabel,ColumnName);
-		printMap(ColumnLabel,ColumnType);	
-//		printMap(ColumnLabel,ColumnTypeName);
-//		printMap(ColumnLabel,Precision);	printMap(ColumnLabel,Scale);
-
-		Map Comment = t.selectMapValue(CommentSQL); 
-		
-//		printMap(ColumnLabel,ColumnType,Precision,Scale);
-//		printMap(ColumnLabel,ColumnType,Precision,Scale,ColumnTypeName);
-		
-		Vector front = new Vector();
-		Vector back = new Vector();
-		
-		/*  for field use-- Copycat */
-		printFieldMapCopycat(ColumnLabel,
-				ColumnType,ColumnTypeName,Precision,Scale,Comment,
-				front, back );
-		
-		/*  for field use-- Standard */
-//		printFieldMap(ColumnLabel,
-//				ColumnType,ColumnTypeName,Precision,Scale,Comment,
-//				front,back );
-		
-		
-		/*  for export use */
-		printExportMap(ColumnLabel,ColumnType,Precision,Scale,ColumnTypeName, Comment);
-		
-		//no column alias
-		printSelectSQLNoTBAlias1(ColumnName, owner+"."+tableName);
-		printSelectSQLWithTBAlias1(ColumnName, owner+"."+tableName);
-		
-		//with column alias
-		System.out.println("\nbelow sql with column alias:");
-//		printSelectSQLWithColAliasNotableAlias(ColumnName, owner+"."+tableName);
-		printSelectSQLWithColAliasCopycat1(ColumnName, owner+"."+tableName);
-		printSelectSQLWithColAlias1(ColumnName, owner+"."+tableName);
-			
-	}
 }

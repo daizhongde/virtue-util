@@ -127,7 +127,18 @@ public class DateUtils {
 	 * @throws ParseException 
 	 */
 	public static Timestamp Str2Timestamp( String str, String fmt ) throws ParseException {
-		return Timestamp.valueOf(str);
+//		return Timestamp.valueOf(str);
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat( fmt );
+		
+		Date date = null;
+		try {
+			date = format.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return new java.sql.Timestamp( date.getTime() );
 	}
 	public static Timestamp Date2Timestamp( Date date ) throws ParseException {
 		return new java.sql.Timestamp( date.getTime() );
@@ -169,12 +180,12 @@ public class DateUtils {
 		return new SimpleDateFormat( format ).format(getCaleCalendar(d,field, amount).getTime());
 	}
 	
-	public static void main(String args[]){
-//		Date date = parseDate( "1900/01/01 00:00:01" );
-		Date date = parseDate( "1900/01/01" );
+	public static void main(String args[]) throws ParseException{
+//		Date date = parseDate( "1900-1-1 00:01" );
+//		Date date = parseDate( "1900/01/01" );
 //		System.out.println("date:"+date.toString());
-		String s = "1900/01/01 00:00:01";
-		s = s.replaceAll("/", "-");
-		System.out.println("s:"+s);
+		String s = "1900-01-01 00:01:01";
+		java.sql.Timestamp q_datetime = DateUtils.Str2Timestamp("1900-1-1 00:01",null);
+		System.out.println("q_datetime:"+q_datetime);
 	}
 }

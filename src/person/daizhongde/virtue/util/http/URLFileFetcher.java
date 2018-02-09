@@ -93,7 +93,9 @@ public class URLFileFetcher {
 //		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("67.198.189.159", 443));
 		URL url2 = new URL(url);  
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress((proxyipport.split(":"))[0], Integer.parseInt((proxyipport.split(":"))[1])));
+		
 		HttpURLConnection conn2 = (HttpURLConnection) url2.openConnection(proxy);
+		
 		if (propertys != null)
 			for (String key : propertys.keySet()) {
 				conn2.addRequestProperty(key, propertys.get(key));

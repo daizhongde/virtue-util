@@ -1,4 +1,4 @@
-package person.daizhongde.virtue.util.db;
+package person.daizhongde.virtue.util.db.mutithread;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,17 +16,17 @@ import org.apache.logging.log4j.Logger;
 
 import person.daizhongde.virtue.sql.SQLManySwitch;
 
-public class BaseDao {
+public class BaseDao2 {
 
 	/** 取得日志记录器Logger */
-	private static Logger log = LogManager.getLogger( BaseDao.class.getName());
+	private static Logger log = LogManager.getLogger( BaseDao2.class.getName());
 	
 	// 查询多个记录
-	public Vector selectSomeNote(String sql) {
+	public Vector selectSomeNote(Connection conn, String sql) {
 		log.debug(sql);
 		Vector vector = new Vector();// 创建结果集向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			int columnCount = rs.getMetaData().getColumnCount();// 获得查询数据表的列数
@@ -57,11 +57,11 @@ public class BaseDao {
 	 * @param sql
 	 * @return
 	 */
-	protected Map selectMapValue(String sql) {
+	protected Map selectMapValue(Connection conn, String sql) {
 		log.debug(sql);
 		Map map = new HashMap();// 创建查询结果集向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			int columnCount = rs.getMetaData().getColumnCount();// 获得查询数据表的列数
@@ -78,10 +78,10 @@ public class BaseDao {
 	}
 	
 	// 查询单个记录--如果查询结果有多条就返回最后一条
-	public Vector selectOnlyNote(String sql) throws SQLException{
+	public Vector selectOnlyNote(Connection conn, String sql) throws SQLException{
 		log.debug(sql);
 		Vector vector = null;// 声明记录向量
-		Connection conn = JDBC.getConnection();// 获得数据库连接
+//		Connection conn = JDBC.getConnection();// 获得数据库连接
 //		try {
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
@@ -102,11 +102,11 @@ public class BaseDao {
 		return vector;// 返回记录向量
 	}
 	//查询多个值(某列的值)--如果结果有多行，则vector包括第一列的所有值.length = 行数
-	public  Vector selectSomeValue(String sql) {
+	public  Vector selectSomeValue(Connection conn, String sql) {
 		log.debug(sql);
 		Vector vector = new Vector();// 创建查询结果集向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			while (rs.next()) {
@@ -121,10 +121,10 @@ public class BaseDao {
 	}
 
 	// 查询单个值
-	public Object selectOnlyValue(String sql) throws SQLException{
+	public Object selectOnlyValue(Connection conn, String sql) throws SQLException{
 		log.debug(sql);
 		Object value = null;// 声明查询结果对象
-		Connection conn = JDBC.getConnection();// 获得数据库连接
+//		Connection conn = JDBC.getConnection();// 获得数据库连接
 //		try {
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
@@ -144,11 +144,11 @@ public class BaseDao {
 	 * @param sql
 	 * @return
 	 */
-	protected Vector selectColumnLabels(String sql) {
+	protected Vector selectColumnLabels(Connection conn, String sql) {
 		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			
@@ -174,11 +174,11 @@ public class BaseDao {
 	 * @param sql
 	 * @return
 	 */
-	protected Vector selectColumnNames(String sql) {
+	protected Vector selectColumnNames(Connection conn, String sql) {
 		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			
@@ -203,11 +203,11 @@ public class BaseDao {
 	 * @param sql
 	 * @return
 	 */
-	protected Vector selectColumnTypes(String sql) {
+	protected Vector selectColumnTypes(Connection conn, String sql) {
 		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			
@@ -232,11 +232,11 @@ public class BaseDao {
 	 * @param sql
 	 * @return
 	 */
-	protected Vector selectColumnTypeNames(String sql) {
+	protected Vector selectColumnTypeNames(Connection conn, String sql) {
 		log.debug(sql);
 		Vector vector = null;// 声明记录向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			
@@ -261,11 +261,11 @@ public class BaseDao {
 	 * @param sql
 	 * @return Vector[]
 	 */
-	protected Vector[] selectColumnNamesAndTypes(String sql) {
+	protected Vector[] selectColumnNamesAndTypes(Connection conn, String sql) {
 		log.debug(sql);
 		Vector[] vector =  new Vector[6];// 声明记录向量
 		try {
-			Connection conn = JDBC.getConnection();// 获得数据库连接
+//			Connection conn = JDBC.getConnection();// 获得数据库连接
 			Statement stmt = conn.createStatement();// 创建连接状态对象
 			ResultSet rs = stmt.executeQuery(sql);// 执行SQL语句获得查询结果
 			
@@ -311,7 +311,7 @@ public class BaseDao {
 //			VectorToStringA.print(vector);
 			rs.close();// 关闭结果集对象
 			stmt.close();// 关闭连接状态对象
-			JDBC.closeConnection();//add by junit test
+//			JDBC.closeConnection();//add by junit test
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -319,10 +319,10 @@ public class BaseDao {
 	}
 	
 	// 插入、修改、删除记录
-	protected boolean longHaul(String sql) throws SQLException{
+	protected boolean longHaul(Connection conn, String sql) throws SQLException{
 		log.debug(sql);
 		boolean isLongHaul = true;// 默认持久化成功
-		Connection conn = JDBC.getConnection();// 获得数据库连接
+//		Connection conn = JDBC.getConnection();// 获得数据库连接
 		SQLException e3 = null;
 		try {
 			conn.setAutoCommit(false);// 设置为手动提交
@@ -346,10 +346,10 @@ public class BaseDao {
 		return isLongHaul;// 返回持久化结果
 	}
 	// 插入、修改、删除记录
-	protected boolean longHaul(String sql, Object[] arr ) throws SQLException{
+	protected boolean longHaul(Connection conn, String sql, Object[] arr ) throws SQLException{
 		log.debug(sql);
 		boolean isLongHaul = true;// 默认持久化成功
-		Connection conn = JDBC.getConnection();// 获得数据库连接
+//		Connection conn = JDBC.getConnection();// 获得数据库连接
 		SQLException e3 = null;
 		try {
 			conn.setAutoCommit(false);// 设置为手动提交
@@ -378,10 +378,10 @@ public class BaseDao {
 		}
 		return isLongHaul;// 返回持久化结果
 	}// 插入、修改、删除记录
-	protected boolean longHaul(String sql, Object[] arr, int[] type ) throws SQLException{
+	protected boolean longHaul(Connection conn, String sql, Object[] arr, int[] type ) throws SQLException{
 		log.debug(sql);
 		boolean isLongHaul = true;// 默认持久化成功
-		Connection conn = JDBC.getConnection();// 获得数据库连接
+//		Connection conn = JDBC.getConnection();// 获得数据库连接
 		SQLException e3 = null;
 		try {
 			conn.setAutoCommit(false);// 设置为手动提交
@@ -414,24 +414,24 @@ public class BaseDao {
 		return isLongHaul;// 返回持久化结果
 	}
 	// 插入记录
-	public boolean insert(String sql) throws SQLException {
-		return longHaul(sql);
+	public boolean insert(Connection conn, String sql) throws SQLException {
+		return longHaul(conn,sql);
 	}
 	// 插入记录
-	public boolean insert(String sql, Object[] arr ) throws SQLException {
-		return longHaul(sql, arr);
+	public boolean insert(Connection conn, String sql, Object[] arr ) throws SQLException {
+		return longHaul(conn,sql, arr);
 	}// 插入记录
-	public boolean insert(String sql, Object[] arr, int[] type ) throws SQLException {
-		return longHaul( sql, arr, type );
+	public boolean insert(Connection conn, String sql, Object[] arr, int[] type ) throws SQLException {
+		return longHaul(conn, sql, arr, type );
 	}
 	
 	// 修改记录
-	public boolean update(String sql) throws SQLException{
-		return longHaul(sql);
+	public boolean update(Connection conn, String sql) throws SQLException{
+		return longHaul(conn,sql);
 	}
 	// 删除记录
-	public boolean delete(String sql) throws SQLException {
-		return longHaul(sql);
+	public boolean delete(Connection conn, String sql) throws SQLException {
+		return longHaul(conn,sql);
 	}
 
 }
