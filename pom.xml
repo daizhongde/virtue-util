@@ -36,7 +36,7 @@
         <json-lib.version>2.4</json-lib.version>
         <commons-lang3.version>3.6</commons-lang3.version>
         <commons-net.version>3.6</commons-net.version>
-        
+        <poi.version>3.15</poi.version>
         <!-- below two jar is not on the net -->
         <dom4j.version>2.0.1</dom4j.version>
         <mysql-connector-java.version>5.1.41</mysql-connector-java.version>
@@ -127,6 +127,12 @@
          <version>${jersey.version}</version>
      </dependency>
      
+     <dependency>
+	    <groupId>com.fasterxml.jackson.dataformat</groupId>
+	    <artifactId>jackson-dataformat-xml</artifactId>
+	    <version>2.9.5</version>
+	</dependency>
+
 		<!-- spring需要的jar包 -->  
         <dependency>  
             <groupId>org.springframework</groupId>  
@@ -181,6 +187,52 @@
 		    <artifactId>mail</artifactId>
 		    <version>${mail.version}</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpcore</artifactId>
+		    <version>4.4.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.5</version>
+		</dependency>
+		<!-- poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-excelant</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml-schemas</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-scratchpad</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		
+		<!-- test -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>${junit.version}</version>
+<!-- 		    <scope>test</scope> -->
+		</dependency>
+		
   </dependencies>
   
   <build>
