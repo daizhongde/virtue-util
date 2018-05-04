@@ -9,7 +9,7 @@ import net.sf.json.JSONObject;
 /**
  * JSON和JAVA的POJO的相互转换
  * 
- * @author wuchengqiang
+ * @author d26297
  */
 public final class JSONUtil {
 

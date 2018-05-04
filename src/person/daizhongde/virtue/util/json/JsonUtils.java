@@ -28,7 +28,7 @@ public class JsonUtils {
 	
 	 /**
 	 * jsonStr2List:(Json 字符串转List). <br/>
-	 * @author z144746
+	 * @author d26297
 	 * @param str
 	 * @param clazz
 	 * @since JDK 1.7

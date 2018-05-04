@@ -16,7 +16,11 @@ import java.util.List;
 import java.util.SortedSet;
 
 import person.daizhongde.virtue.util.test.Printer;
-
+/**
+ * 
+ * @author daizd
+ *
+ */
 public class FileUtil {
 
 	public static void copy(String source, String destination)
@@ -57,7 +61,7 @@ public class FileUtil {
 	/**
 	 * Java文件操作 获取文件扩展名
 	 *
-	 * Created on: 2011-8-2 Author: blueeagle
+	 * Created on: 2018-4-16 @author daizd
 	 */
 	public static String getExtensionName(String filename) {
 		if ((filename != null) && (filename.length() > 0)) {
@@ -72,7 +76,7 @@ public class FileUtil {
 	/**
 	 * Java文件操作 获取不带扩展名的文件名
 	 *
-	 * Created on: 2011-8-2 Author: blueeagle
+	 * Created on:  2018-4-16 @author daizd
 	 */
 	public static String getFileNameNoEx(String filename) {
 		if ((filename != null) && (filename.length() > 0)) {
@@ -149,7 +153,7 @@ public class FileUtil {
 	 * @param FILE_IN
 	 * @return
 	 */
-		public static String read2String(InputStream is)
+		public static String read2String2(InputStream is)
 		{
 			int len = 0;
 			StringBuilder  str = new StringBuilder("");
