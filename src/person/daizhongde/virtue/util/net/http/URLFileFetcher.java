@@ -22,7 +22,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.Connection.Method;
 
 import person.daizhongde.virtue.util.file.FileNameUtil;
-import person.daizhongde.virtue.util.file.FileUtil;
+import person.daizhongde.virtue.util.file.FileUtil1;
 
 public class URLFileFetcher {
 	/**
@@ -77,7 +77,7 @@ public class URLFileFetcher {
 			Map<String, Object> propertys, long q , String extName) throws IOException{
 		
 		if(localPath.indexOf(".")!=-1){
-			extName = FileUtil.getExtensionName(localPath);
+			extName = FileUtil1.getExtensionName(localPath);
 		}
 		
 		URL url2 = new URL(url);
@@ -208,7 +208,7 @@ public class URLFileFetcher {
 		System.out.println("contentEncoding:"+contentEncoding);
 		
 		InputStream is = conn2.getInputStream();
-		FileUtil util = new FileUtil();
+		FileUtil1 util = new FileUtil1();
 		util.write2File(is, "D:/usr/test2/Aan%20Mitsu%20%2871%29.jpg");
 		
 		try {
@@ -247,7 +247,7 @@ public class URLFileFetcher {
 		
 		System.out.println("开始下载：url:"+url+",localPath:"+localPath);
 		if(localPath.indexOf(".")!=-1){
-			extName = FileUtil.getExtensionName(localPath);
+			extName = FileUtil1.getExtensionName(localPath);
 		}
 		
 		String absDirectory_dest = localPath.substring(0, localPath.lastIndexOf("/"));
@@ -296,7 +296,7 @@ public class URLFileFetcher {
 		
 		System.out.println("开始下载：url:"+url+",localPath:"+localPath);
 		if(localPath.indexOf(".")!=-1){
-			extName = FileUtil.getExtensionName(localPath);
+			extName = FileUtil1.getExtensionName(localPath);
 		}
 		
 		String absDirectory_dest = localPath.substring(0, localPath.lastIndexOf("/"));
