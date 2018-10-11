@@ -22,7 +22,7 @@ import java.util.concurrent.Semaphore;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class ElapseTime {
+public class ElapsedTime {
 
 	public static void main(String args[]){
 		Timestamp beginTime = new Timestamp( new Date().getTime() - 2*60*1000 );

@@ -80,7 +80,7 @@ public class DateFormatUtil {
 	public static void main(String[] args) {
 		System.out.println("11\n11");
 		SimpleDateFormat stm = new SimpleDateFormat(
-				"yyyy年MM月dd日 HH时mm分ss秒.S毫秒 E");
+				"yyyy年MM月dd日 HH时mm分ss秒.SSS毫秒 E");
 		SimpleDateFormat stm1 = new SimpleDateFormat("yy年MM月dd日 HH时mm分ss秒 E");
 		// SimpleDateFormat stm11=new SimpleDateFormat("y年MM月dd日 HH时mm分ss秒 E");
 		SimpleDateFormat stm2 = new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒 a");

@@ -32,7 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import person.daizhongde.virtue.constant.INIT;
+import person.daizhongde.virtue.util.constant.INIT;
 import person.daizhongde.virtue.util.ie.POICellUtil;
 
 /**

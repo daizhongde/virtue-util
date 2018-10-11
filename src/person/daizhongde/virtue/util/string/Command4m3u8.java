@@ -8,10 +8,10 @@ public class Command4m3u8 {
 	 */
 	  public static void main(String[] args)  {
 
-//		  copy 0.ts/b + 1.ts/b  2-nnpj180-5b.ts 
+//		  copy 0.ts/b + 1.ts/b  2-nnpj180-5b.ts   2-ssni076-5b.mp4
 		  int start=0;
-		  int end = 649;//700 701 951
-		  String fileName = "2-abp384-5b.ts";
+		  int end = 567;//700 701 951
+		  String fileName = "2-ssni076-5b.ts";
 		  
 		  String copy = "copy "+start+".ts/b ";
 		  

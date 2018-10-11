@@ -44,7 +44,23 @@ public class ReflectUtil {
 //		现在我们已经有了一个Object对象，下一步就可以对这个Object进行强制转换了。
 //		假如org.test.GetClass 继承一个叫GetInterface的接口。我们就可以把这个object对象强制转换成这个接口，然后就可以调用其中的方法了。
 	}
-	
+	/**
+	 *  cfg-conn   ---->   setCfgConn/getCfgConn
+	 *  cfgconn    ---->   setCfgconn 
+	 * @param label
+	 * @return
+	 */
+	public static String getMethodName( String label, String prefix ){
+		int i = label.indexOf("-");
+		if(i == -1 ){
+			i = label.indexOf("_");
+		}
+		if( i == -1 ){
+			return prefix+Character.toUpperCase( label.charAt(0) ) + label.substring(1);
+		}else{
+			return prefix+Character.toUpperCase( label.charAt(0) ) + label.substring(1, i) + Character.toUpperCase( label.charAt(i+1) ) + label.substring( i+2 );
+		}
+	}
 	
     public static void main(String args[]) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Foo foo = new Foo("这个一个Foo对象！");
