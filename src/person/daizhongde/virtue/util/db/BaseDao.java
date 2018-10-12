@@ -13,8 +13,8 @@ import java.util.Vector;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import person.daizhongde.virtue.sql.SQLManySwitch;
+// 此类可能不是最新的，因为virtue中程中的重复
+import person.daizhongde.virtue.util.sql.SQLManySwitch;
 
 public class BaseDao {
 

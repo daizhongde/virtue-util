@@ -32,7 +32,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import person.daizhongde.virtue.util.constant.INIT;
 import person.daizhongde.virtue.util.ie.POICellUtil;
 
 /**
@@ -96,8 +95,8 @@ public class Excel2Excel {
 
 	private Map<String,ArrayList<MyCellValue>> cellList_Map = new HashMap<String,ArrayList<MyCellValue>>();
 	/** 单个库同时支持的最大连接数  INIT.maxThreadNum , suggest 20, good db can be bigger **/
-	private int taskNum = INIT.maxThreadNum/2;
-//	private int taskNum = 2;
+//	private int taskNum = INIT.maxThreadNum/2;
+	private int taskNum = 2;
 	
 //	/** 每个库同时支持的最大连接数 **/
 //	private Map<String, Semaphore> taskNum_Map = new HashMap<String, Semaphore>();

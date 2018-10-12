@@ -7,6 +7,8 @@
   <description>virtue-util support jdk1.7+</description>
   <url>http://maven.apache.org</url>
   
+    <packaging>jar</packaging>
+    
       <properties>
         <JDK.version>1.8</JDK.version>
         <jersey.version>2.22.2</jersey.version>

@@ -22,10 +22,10 @@ public class FileNameUtil {
 //		java.io.File file = new java.io.File(source);
 		String absPath = file.getAbsolutePath();
 		String oldFileName = file.getName();
-		String fileEx = FileUtil1.getExtensionName( oldFileName );
+		String fileEx = FileUtil.getExtensionName( oldFileName );
 		String parentDirectory = absPath.substring(0,absPath.indexOf(oldFileName));
 		
-		String oldFileNameNoEx = FileUtil1.getFileNameNoEx( oldFileName );
+		String oldFileNameNoEx = FileUtil.getFileNameNoEx( oldFileName );
 		String newFileNameNoEx = "";
 		String newFileName = "";
 		
@@ -114,10 +114,10 @@ public class FileNameUtil {
 //		java.io.File file = new java.io.File(source);
 		String absPath = file.getAbsolutePath();
 		String oldFileName = file.getName();
-		String fileEx = FileUtil1.getExtensionName( oldFileName );
+		String fileEx = FileUtil.getExtensionName( oldFileName );
 		String parentDirectory = absPath.substring(0,absPath.indexOf(oldFileName));
 		
-		String oldFileNameNoEx = FileUtil1.getFileNameNoEx( oldFileName );
+		String oldFileNameNoEx = FileUtil.getFileNameNoEx( oldFileName );
 		String newFileNameNoEx = "";
 		String newFileName = "";
 		

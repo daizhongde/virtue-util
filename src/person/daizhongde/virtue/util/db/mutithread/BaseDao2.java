@@ -14,7 +14,7 @@ import java.util.Vector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import person.daizhongde.virtue.sql.SQLManySwitch;
+import person.daizhongde.virtue.util.sql.SQLManySwitch;
 
 public class BaseDao2 {
 
