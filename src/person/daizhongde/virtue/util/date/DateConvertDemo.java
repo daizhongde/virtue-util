@@ -35,6 +35,7 @@ public class DateConvertDemo {
 		String str = format.format(date);
 		return str;
 	}
+
 	/**
 	 * 字符串转换成日期
 	 * 
@@ -52,7 +53,24 @@ public class DateConvertDemo {
 		}
 		return date;
 	}
+	/**
+	 * 字符串转换成日期
+	 * 
+	 * @param str
+	 * @param format
+	 * @return date
+	 */
+	public static Date StrToDate(String str, String fmt ) {
 
+		SimpleDateFormat format = new SimpleDateFormat(fmt);
+		Date date = null;
+		try {
+			date = format.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
 	/**
 	 * YYYYMMDD YYYYMMDDHHNNSS YYYY-MM-DD DD-MM-YYYY MM-DD-YYYY
 	 * YYYY-MM-DD-HHNNSS YYYY-MM-DD-HHNNSSAM/PM YYYY-MM-DD-HH-NN-SS
@@ -60,6 +78,7 @@ public class DateConvertDemo {
 	 * 
 	 * yyyyMMdd yyyyMMddHHmmss yyyy-MM-dd dd-MM-yyyy MM-dd-yyyy
 	 * yyyy-MM-dd-HHmmss yyyy-MM-dd-HHmmssa yyyy-MM-dd-HH-mm-ss
+	 * yyyy-MM-dd HH:mm:ss
 	 * 
 	 * @param args
 	 */
@@ -69,6 +88,11 @@ public class DateConvertDemo {
 		Date date = new Date();
 		   System.out.println("日期转字符串：" + DateConvertDemo.DateToStr(date));
 		   System.out.println("字符串转日期：" + DateConvertDemo.StrToDate(DateConvertDemo.DateToStr(date)));
+		   System.out.println("字符串转日期：" 
+				   + DateConvertDemo.StrToDate(
+						   "2019-01-24 15:49:00","yyyy-MM-dd HH:mm:ss"
+						)
+				);
 	}
 
 }
