@@ -245,6 +245,12 @@
 		    <version>${poi.version}</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>easyexcel</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+
 		<!-- test -->
 		<dependency>
 		    <groupId>junit</groupId>
