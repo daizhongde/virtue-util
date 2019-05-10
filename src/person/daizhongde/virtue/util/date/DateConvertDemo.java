@@ -81,18 +81,19 @@ public class DateConvertDemo {
 	 * yyyy-MM-dd HH:mm:ss
 	 * 
 	 * @param args
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 
-		
 		Date date = new Date();
-		   System.out.println("日期转字符串：" + DateConvertDemo.DateToStr(date));
-		   System.out.println("字符串转日期：" + DateConvertDemo.StrToDate(DateConvertDemo.DateToStr(date)));
-		   System.out.println("字符串转日期：" 
-				   + DateConvertDemo.StrToDate(
-						   "2019-01-24 15:49:00","yyyy-MM-dd HH:mm:ss"
-						)
-				);
+		System.out.println("日期转字符串：" + 
+				DateConvertDemo.DateToStr(date));
+		System.out.println("字符串转日期：" + 
+				new SimpleDateFormat("yyyy年MM月").parse("2019年5月"));
+		System.out.println("字符串转日期：" + 
+				DateConvertDemo.StrToDate(DateConvertDemo.DateToStr(date)));
+		System.out.println("字符串转日期：" + 
+				DateConvertDemo.StrToDate("2019-01-24 15:49:00", "yyyy-MM-dd HH:mm:ss"));
 	}
 
 }

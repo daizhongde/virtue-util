@@ -32,7 +32,10 @@ public class DateCalc {
 				gc.get(Calendar.DATE));
 		return sf.format(gc.getTime());
 	}
-
+	/**
+	 * 6个月，半年
+	 * @return
+	 */
 	public String getHalfYear() {
 		gc.setTime(d);
 		gc.add(2, +6);
@@ -40,7 +43,10 @@ public class DateCalc {
 				gc.get(Calendar.DATE));
 		return sf.format(gc.getTime());
 	}
-
+	/**
+	 * 三个月，一季度
+	 * @return
+	 */
 	public String getQuarters() {
 		gc.setTime(d);
 		gc.add(2, +3);
@@ -117,6 +123,106 @@ public class DateCalc {
     {
         int days = (int) ((date2.getTime() - date1.getTime()) / (1000*3600*24));
         return days;
+    }
+    /**
+     * 获取某年某月的第一天
+     * @Title:getFisrtDayOfMonth
+     * @Description:
+     * @param:@param year
+     * @param:@param month start with 0
+     * @return:String
+     * @throws
+     */
+    public static String getFisrtDayOfMonth(int year,int month)
+    {
+  	  GregorianCalendar cal = new GregorianCalendar();
+      //设置年份
+      cal.set(Calendar.YEAR,year);
+      //设置月份
+      cal.set(Calendar.MONTH, month);
+      //获取某月最小天数
+      int firstDay = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
+      //设置日历中月份的最小天数
+      cal.set(Calendar.DAY_OF_MONTH, firstDay);
+      //格式化日期
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      String firstDayOfMonth = sdf.format(cal.getTime());
+      return firstDayOfMonth;
+    }
+    /**
+     * 获取某年某月的第一天
+     * @param year
+     * @param month start with 0
+     * @param format 返回的日期格式
+     * @return
+     */
+    public static String getFisrtDayOfMonth(int year,int month, String format)
+    {
+	  GregorianCalendar cal = new GregorianCalendar();
+      //设置年份
+      cal.set(Calendar.YEAR,year);
+      //设置月份
+      cal.set(Calendar.MONTH, month);
+      //获取某月最小天数
+      int firstDay = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
+      //设置日历中月份的最小天数
+      cal.set(Calendar.DAY_OF_MONTH, firstDay);
+      //格式化日期
+      SimpleDateFormat sdf = new SimpleDateFormat(format);
+      String firstDayOfMonth = sdf.format(cal.getTime());
+      return firstDayOfMonth;
+    }
+    /**
+     * 获取某月的最后一天
+     * @Title:getLastDayOfMonth
+     * @Description:
+     * @param:@param year
+     * @param:@param month start with 0
+     * @param:@return
+     * @return:String
+     * @throws
+     */
+    public static String getLastDayOfMonth(int year,int month)
+    {
+//      Calendar cal = Calendar.getInstance();
+	  GregorianCalendar cal = new GregorianCalendar();
+      //设置年份
+      cal.set(Calendar.YEAR,year);
+      //设置月份
+      cal.set(Calendar.MONTH, month);
+      //获取某月最大天数
+      int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+      //设置日历中月份的最大天数
+      cal.set(Calendar.DAY_OF_MONTH, lastDay);
+      //格式化日期
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      String lastDayOfMonth = sdf.format(cal.getTime());
+      return lastDayOfMonth;
+    }
+/**
+ * 
+ * @param year
+ * @param month start with 0
+ * @param format 返回的日期格式
+ * @return
+ */
+    public static String getLastDayOfMonth(int year,int month, String format)
+    {
+//      Calendar cal = Calendar.getInstance();
+
+  	  GregorianCalendar cal = new GregorianCalendar();
+      //设置年份
+      cal.set(Calendar.YEAR,year);
+      //设置月份
+      cal.set(Calendar.MONTH, month);
+      //获取某月最大天数
+      int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+      //设置日历中月份的最大天数
+      cal.set(Calendar.DAY_OF_MONTH, lastDay);
+      //格式化日期
+      SimpleDateFormat sdf = new SimpleDateFormat(format);
+      String lastDayOfMonth = sdf.format(cal.getTime());
+      return lastDayOfMonth;
     }
 	public static void main(String[] args) {
 		DateCalc ud = new DateCalc();

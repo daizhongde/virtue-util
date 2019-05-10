@@ -25,21 +25,25 @@ public class FilePathUtils {
 	public String getWebRoot() throws IllegalAccessException {
 		String path = getWebClassesPath();
 		if (path.indexOf("WEB-INF") > 0) {
-			path = path.substring(0, path.indexOf("WEB-INF/classes"));
+			if(path.startsWith("/")&&path.contains(":")){
+				path = path.substring(1, path.indexOf("WEB-INF/classes"));
+			}else{
+				path = path.substring(0, path.indexOf("WEB-INF/classes"));
+			}
 		} else {
 			throw new IllegalAccessException("");
 		}
 		return path;
 	}
 
-	public String getShopXMLPath() {
-		String path = null;
-		try {
-			path = getWebRoot();
-			path = path + "shop/" + "shop.xml";
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return path;
-	}
+//	public String getShopXMLPath() {
+//		String path = null;
+//		try {
+//			path = getWebRoot();
+//			path = path + "shop/" + "shop.xml";
+//		} catch (IllegalAccessException e) {
+//			e.printStackTrace();
+//		}
+//		return path;
+//	}
 }
