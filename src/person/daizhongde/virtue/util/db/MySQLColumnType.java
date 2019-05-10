@@ -18,9 +18,9 @@ public class MySQLColumnType extends BaseDao{
 	public static void main(String args[]) throws Exception{
 		MySQLColumnType t = new MySQLColumnType();
 		//cpab gzpost tool
-		String owner = "test";
+		String owner = "tool";
 //t_q_main   t_q_detail  
-		String tableName = "t_hospital";//for comment query
+		String tableName = "t_copote_employee";//for comment query
 		String tableNameWithUSER = owner+"."+tableName;//for data query  eg:"cpab.TB_PAYER_COMMI_INFO"
 	
 		String sql = "select * from "+tableNameWithUSER;

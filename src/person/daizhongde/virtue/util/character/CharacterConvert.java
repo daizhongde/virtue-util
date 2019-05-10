@@ -94,7 +94,7 @@ public class CharacterConvert{
 	}
 	
 	public static String testCharSet(String s){
-		String[] arr = {"GBK","UTF-8","ISO-8859-1"};
+		String[] arr = {"GB18030","UTF-8","ISO-8859-1"};
 		 String str="";
 		  	try{
 		  		for(int i =0; i<arr.length; i++){
