@@ -1,9 +1,11 @@
 package person.daizhongde.virtue.util.log4j;
 
-//import org.apache.log4j.*;
-//import org.apache.log4j.Logger;
+//import org.apache.log4j.Logge;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 public class BaseLog {
-	/** 取得日志记录器Logger */
-//	public Logger logger = Logger.getLogger(BaseLog.class);
+//	public Logge log = Logge.getLogge(BaseLog.class);//老的1.2的log4j
+
+	/** 取得日志记录器Logger   log4j2 */
+	public Logger log = LoggerFactory.getLogger(BaseLog.class);
 }
