@@ -7,9 +7,9 @@ import org.junit.Test;
 public class Base64Util {
 
 	private String text = "DZd123456";
-	private String mw = "==AbsVnb";//"null"
+	private String mw = "0kDNwkWYilGe";//"null"
 	
-	@Test
+//	@Test
 	public void testJDKBase64() {
 		String msg = Base64.getEncoder().encodeToString(text.getBytes());
 		System.out.println("加密：" + msg);
@@ -25,7 +25,7 @@ public class Base64Util {
         System.out.println("反转:"+reve);
 	}
 
-	@Test
+//	@Test
 	public void testCommonsCodec() {
 		byte[] byteArr = org.apache.commons.codec.binary.Base64.encodeBase64(text.getBytes());
 		String msg = new String(byteArr);
@@ -40,7 +40,7 @@ public class Base64Util {
 	@Test
 	public void testDecodeCopoteMailPWD() {
 		//反转
-		StringBuffer sb = new StringBuffer("==AbsVnb");
+		StringBuffer sb = new StringBuffer("0kDNwkWYilGe");
 		sb = sb.reverse();
 		String reve=sb.toString();
         System.out.println("反转:"+reve);

@@ -46,6 +46,8 @@
         <!-- below two jar is not on the net -->
         <dom4j.version>2.0.1</dom4j.version>
         <mysql-connector-java.version>5.1.41</mysql-connector-java.version>
+	    <httpcore.version>4.4.9</httpcore.version>
+	    <httpclient.version>4.5.5</httpclient.version>
         <mail.version>1.4.7</mail.version>
     </properties>
     
@@ -211,12 +213,12 @@
 		<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpcore</artifactId>
-		    <version>4.4.9</version>
+		    <version>${httpcore.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
-		    <version>4.5.5</version>
+		    <version>${httpclient.version}</version>
 		</dependency>
 		<!-- poi -->
 		<dependency>
