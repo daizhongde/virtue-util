@@ -7,7 +7,7 @@ var t = [ {
 			"xinshijixinxi" : "99330048",
 			"datacenter" : "99110013",
 			"talkweb" : "9943010287",
-			"isoftstone" : "99110062",
+			"mysoftstone" : "99110062",
 			"zhangsharenhe" : "9943010181",
 			"chinacreator" : "9943010170",
 			"chuangxinaite" : "9943010154",

@@ -30,12 +30,12 @@ public class ClientTest {
 //			请求	POST /user/employeeSeachList HTTP/1.1
 //			x-requested-with	XMLHttpRequest
 //			Accept-Language	zh-cn
-//			Referer	https://oa.asiainfo.com/user/employeeSeach
+//			Referer	https://oa.mysiainfo.com/user/employeeSeach
 //			Accept	text/plain, */*; q=0.01
 //			Content-Type	application/x-www-form-urlencoded
 //			Accept-Encoding	gzip, deflate
 //			User-Agent	Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; InfoPath.3; GWX:RESERVED)
-//			Host	oa.asiainfo.com
+//			Host	oa.mysiainfo.com
 //			Content-Length	182
 //			Connection	Keep-Alive
 //			Cache-Control	no-cache
@@ -43,18 +43,18 @@ public class ClientTest {
 			propertys.put("请求", "POST /user/employeeSeachList HTTP/1.1");
 			propertys.put("x-requested-with", "XMLHttpRequest");
 			propertys.put("Accept-Language", "zh-cn");
-			propertys.put("Referer", "https://oa.asiainfo.com/user/employeeSeach");
+			propertys.put("Referer", "https://oa.mysiainfo.com/user/employeeSeach");
 			propertys.put("Accept", "text/plain, */*; q=0.01");
 			propertys.put("Content-Type", "application/x-www-form-urlencoded");
 			propertys.put("Accept-Encoding", "gzip, deflate");
 			propertys.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; InfoPath.3; GWX:RESERVED)");
-			propertys.put("Host", "oa.asiainfo.com");
+			propertys.put("Host", "oa.mysiainfo.com");
 			propertys.put("Content-Length", "182");
 			propertys.put("Connection", "Keep-Alive");
 			propertys.put("Cache-Control", "no-cache");
 			propertys.put("Cookie", "JSESSIONID=b4xf4FebvN0NXhgtM9q0Z1AaiZv2LWdvHsgScC5K1P86rOPY8Fmd!931069562");
 			
-			HttpRespons hr = request.sendPost("https://oa.asiainfo.com/user/employeeSeachList",
+			HttpRespons hr = request.sendPost("https://oa.mysiainfo.com/user/employeeSeachList",
 					params, propertys);
 					
 			System.out.println(hr.getUrlString());

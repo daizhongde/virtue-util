@@ -515,8 +515,8 @@ public class Excel2Excel {
 	public static void main(String[] args) {
 //		Connection conn = null;
 		try {
-//			String inputFile = "F:\\asiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#.xlsx";
-//			String outputFile = "F:\\asiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#_output.xlsx";
+//			String inputFile = "F:\\mysiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#.xlsx";
+//			String outputFile = "F:\\mysiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#_output.xlsx";
 //			String inputFile = "F:\\Java项目\\migration2.0\\测试文档\\OPP Migration Report DR# - Wholesale  V0.2 - test.xlsx";
 //			String outputFile ="F:\\Java项目\\migration2.0\\测试文档\\OPP Migration Report DR# - Wholesale  V0.2 - test1.xlsx";
 			
@@ -525,7 +525,7 @@ public class Excel2Excel {
 			
 //			"G:\\KPI2-sql.xls","G:\\result.xls"
 			
-			//"F:\asiainfo\DR4\connexion report\OP Migration WS_Connexion Report DR4#.xlsx"
+			//"F:\mysiainfo\DR4\connexion report\OP Migration WS_Connexion Report DR4#.xlsx"
 //			conn = getJDBCConnection("localhost", "3306", "tool", "root",
 //					"123");
 //			conn.setAutoCommit(false);

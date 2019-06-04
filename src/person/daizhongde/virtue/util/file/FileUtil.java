@@ -191,7 +191,7 @@ public class FileUtil {
 //				path:/D:/daizd/Workspaces/MyEclipse%202015%20CI/migration/target/test-classes/
 //				or: D:/tomcat/webapps/migration/WEB-INF/classes/
 				
-//				D:\AppData\Workspaces\MyEclipse 2015\message\bin\com\isoftstone\mq\mdm\xml4test
+//				D:\AppData\Workspaces\MyEclipse 2015\message\bin\com\mysoftstone\mq\mdm\xml4test
 				
 				int binIndex = path.indexOf("/bin/");
 				int classesIndex = path.indexOf("/classes/");
@@ -377,7 +377,7 @@ public class FileUtil {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		FileUtil util = new FileUtil();
-//		util.readFile("com/isoftstone/mq/mdm/xml4test/T_GB_ORGANIZATION.xml");/
+//		util.readFile("com/mysoftstone/mq/mdm/xml4test/T_GB_ORGANIZATION.xml");/
 		String s = FileUtil.read2String2("C:/Users/daizd/Desktop/ssh-lib_20161108.txt");
 		String[] a = s.split("\r\n");
 		List<String> l = Arrays.asList(a);

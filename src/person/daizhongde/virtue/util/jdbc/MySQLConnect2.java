@@ -21,7 +21,7 @@ public class MySQLConnect2
               if(connection!=null)
                   System.out.println("success");
               statement=connection.createStatement();
-              resultSet=statement.executeQuery("select * from t_asiainfo_employee;");
+              resultSet=statement.executeQuery("select * from t_mysiainfo_employee;");
               int i = 0;
               while(resultSet.next())
               {
