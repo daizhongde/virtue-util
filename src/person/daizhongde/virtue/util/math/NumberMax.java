@@ -1,4 +1,4 @@
-package person.daizhongde.virtue.util.math;
+﻿package person.daizhongde.virtue.util.math;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -28,7 +28,7 @@ import java.util.Vector;
 
 数据类型          			 大小   	 范围                                            										 默认值 
 byte(字节)		8	-128 - 127											0
-shot(短整型)		16	-32768 - 32768										0
+short(短整型)		16	-32768 - 32768										0
 int(整型)			32	-2147483648-2147483648                              0
 long(长整型)		64	-9233372036854477808-9233372036854477808            0        
 float(浮点型)		32  -3.40292347E搜索+38-3.40292347E+38                   	0.0f

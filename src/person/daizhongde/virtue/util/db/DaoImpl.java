@@ -75,6 +75,7 @@ public class DaoImpl {
 		System.out.println("begin execute sql...");
 
 		ExecutorService pool = Executors.newFixedThreadPool( maxThreadNum );
+		@SuppressWarnings("rawtypes")
 		List<Future> list = new ArrayList<Future>();
 		
 		MTConnectionPool pl = new MTConnectionPool( url, 

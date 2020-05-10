@@ -1,4 +1,7 @@
-package person.daizhongde.virtue.util.json;
+﻿package person.daizhongde.virtue.util.json;
+
+import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -52,5 +55,12 @@ public class FastJSON {
 	 */
 	public static String toJSon(Object object) {
 		return JSON.toJSONString(object);
+	}
+
+	public static void main(String args[]){
+                           String cPpList="";
+		TypeReference<List<Map<String, Object>>> valueTypeRef = new TypeReference<List<Map<String, Object>>>(){};
+		Feature[] ob = new Feature[]{Feature.IgnoreNotMatch, Feature.AllowSingleQuotes};
+		List<Map<String, Object>> list = JSON.parseObject(cPpList, valueTypeRef, ob );
 	}
 }

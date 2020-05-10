@@ -1,6 +1,5 @@
 package person.daizhongde.virtue.util.system;
 
-import java.io.File;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Iterator;
