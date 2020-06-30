@@ -125,7 +125,7 @@ public class File2UnionSQL {
 		// util.readFile("com/mysoftstone/mq/mdm/xml4test/T_GB_ORGANIZATION.xml");/
 		
 		String sql = util.read2String(
-				"D:/daizd/Desktop/1.txt");
+				"D:/daizd/Desktop/bak/1.txt");
 		
 //		String begin_Str = util.read2String(
 //				"D:/daizd/Desktop/begin.txt");
