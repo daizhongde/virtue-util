@@ -98,22 +98,25 @@ public class DateFormatUtil {
 		// java.lang.Object
 		// |-java.util.Date
 		// |-java.sql.Timestamp
-		// 2011年01月07日 20时52分09秒.353毫秒 星期五
-		System.out.println(stm.format(new Date()));
-		// 11年01月07日 20时48分34秒 星期五
-		System.out.println(stm1.format(new Date()));
+		// 2011年01月07日 20时52分09秒.353毫秒 星期五   
+//  yyyy年MM月dd日 HH时mm分ss秒.S毫秒 E
+		System.out.println("yyyy年MM月dd日 HH时mm分ss秒.S毫秒 E : "+stm.format(new Date()));
+		
+		
+		// 11年01月07日 20时48分34秒 星期五             yy年MM月dd日 HH时mm分ss秒 E
+		System.out.println("yy年MM月dd日 HH时mm分ss秒 E:"+stm1.format(new Date()));
 		// 1年01月07日 20时48分34秒 星期五
 		// System.out.println(stm11.format(new Date()));
 		// 2011年01月07日 08时53分56秒 下午
-		System.out.println(stm2.format(new Date()));
+		System.out.println("yyyy年MM月dd日 hh时mm分ss秒 a : "+stm2.format(new Date()));
 		// 2011年01月18日 08时32分51秒 Tue
-		System.out.println(stm3.format(new Date()));
+		System.out.println("yyyy年MM月dd日 hh时mm分ss秒 E : "+stm3.format(new Date()));
 		// 2011年01月18日 08时38分52秒 Tuesday
-		System.out.println(stm4.format(new Date()));
+		System.out.println("yyyy年MM月dd日 hh时mm分ss秒 EEEE : "+stm4.format(new Date()));
 		// 2011年01月07日 09时07分32秒 PM
-		System.out.println(stm5.format(new Date()));
-		System.out.println(stm6.format(new Date()));
-		System.out.println(stm7.format(new Date()));
+		System.out.println("yyyy年MM月dd日 hh时mm分ss秒 a : "+stm5.format(new Date()));
+		System.out.println("yyMMdd-HHmmss.S : "+stm6.format(new Date()));
+		System.out.println("yyMMdd-HHmmss.S : "+stm7.format(new Date()));
 
 		// DateFormatUtil dfu = new DateFormatUtil();
 		// dfu.testCalendar();

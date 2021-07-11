@@ -184,8 +184,22 @@ public class DateUtils {
 //		Date date = parseDate( "1900-1-1 00:01" );
 //		Date date = parseDate( "1900/01/01" );
 //		System.out.println("date:"+date.toString());
-		String s = "1900-01-01 00:01:01";
-		java.sql.Timestamp q_datetime = DateUtils.Str2Timestamp("1900-1-1 00:01",null);
-		System.out.println("q_datetime:"+q_datetime);
+//		String s = "1900-01-01 00:01:01";
+//		java.sql.Timestamp q_datetime = DateUtils.Str2Timestamp("1900-1-1 00:01",null);
+//		System.out.println("q_datetime:"+q_datetime);
+		
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(new Date());
+		gc.add(5, 13);
+		gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH),
+				gc.get(Calendar.DATE));
+		
+
+        // 获取当前时间//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// new Date()为获取当前系统时间
+        String nowTime = df.format( new Date(gc.getTimeInMillis()));
+        System.out.println("nowTime:"+nowTime);
+		
 	}
 }

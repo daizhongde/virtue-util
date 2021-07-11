@@ -2,7 +2,7 @@
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Vector;
+
 /**
 2^1  16	 	2^2  32	 	2^3  16 	2^4 16		2^5  32	
 2^6  64	 	2^7  128	2^8  256 	2^9 512   	2^10 1024  

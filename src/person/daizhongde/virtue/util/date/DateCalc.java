@@ -1,5 +1,6 @@
 package person.daizhongde.virtue.util.date;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -224,6 +225,58 @@ public class DateCalc {
       String lastDayOfMonth = sdf.format(cal.getTime());
       return lastDayOfMonth;
     }
+    
+    /**
+     * 获取某年某月的第一天
+     * 
+     * @param ny 年月
+     * @param nyFormat 年月格式      eg: yyyy年MM月 
+     * @param retFormat 年月格式   eg: yyyy/MM/dd
+     * @return
+     * @throws ParseException 
+     */
+    public static String extGetFisrtDayOfMonth(String ny, 
+    		String nyFormat, 
+    		String retFormat) throws ParseException
+    {
+    	Date date = new SimpleDateFormat( nyFormat).parse(ny);
+//		String ny_en = new SimpleDateFormat("yyyy-MM").format(date);
+		
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(date);
+		
+		return DateCalc.getFisrtDayOfMonth(
+				gc.get(Calendar.YEAR), 
+				gc.get(Calendar.MONTH),
+				retFormat);
+    }
+    
+    /**
+     * 获取某年某月的最后一天
+     * 
+     * @param ny 年月
+     * @param nyFormat 年月格式      eg: yyyy年MM月 
+     * @param retFormat 年月格式   eg: yyyy/MM/dd
+     * @return
+     * @throws ParseException 
+     */
+    public static String extGetLastDayOfMonth(String ny, 
+    		String nyFormat, 
+    		String retFormat) throws ParseException
+    {
+    	Date date = new SimpleDateFormat( nyFormat).parse(ny);
+//		String ny_en = new SimpleDateFormat("yyyy-MM").format(date);
+		
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(date);
+		
+		return DateCalc.getLastDayOfMonth(
+				gc.get(Calendar.YEAR), 
+				gc.get(Calendar.MONTH),
+				retFormat
+		);
+    }
+    
 	public static void main(String[] args) {
 		DateCalc ud = new DateCalc();
 		System.out.println(ud.getLocalDate());
