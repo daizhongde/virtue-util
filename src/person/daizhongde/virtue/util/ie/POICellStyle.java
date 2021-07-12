@@ -647,8 +647,10 @@ public class POICellStyle {
 			break;
 		case Types.DATE://91
 		case Types.TIMESTAMP: //93
-			datetimeZF = wb.createCellStyle();
-			datetimeZF.setDataFormat( wb.createDataFormat().getFormat("yyyy/mm/dd hh:mm:ss"));
+			if(null==datetimeZF){
+				datetimeZF = wb.createCellStyle();
+				datetimeZF.setDataFormat( wb.createDataFormat().getFormat("yyyy/mm/dd hh:mm:ss"));
+			}
 			break;
 		default : System.out.println("没有对应的列类型！");
 		}

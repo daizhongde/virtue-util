@@ -1,4 +1,4 @@
-package person.daizhongde.virtue.util.jdbc;
+package person.daizhongde.virtue.util.ie;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +11,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +33,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import person.daizhongde.virtue.util.date.ElapsedTimePrinter;
+import person.daizhongde.virtue.util.exception.BusinessException;
+import person.daizhongde.virtue.util.ie.POICellStyle;
 import person.daizhongde.virtue.util.ie.POICellUtil;
 
 /**
@@ -45,18 +49,28 @@ class MyCellValue {
 	int row;
 	int col;
 	String sql;
-	boolean isSql;
+	boolean isSql;// 如果 sql 执行出了异常可设置为　false
 	Object[][] values;
 	String urlName;
 	int[][] columnTypes, scales;
 }
 
+/** 
+ *  核心步骤：
+ *    1、循环读sheet row cell 获取自定义sql对象 放入   Map<String,ArrayList<MyCellValue>> cellList_Map 中对应的数据源key下value中
+ *        key为数据库连接  db_urlName， Value为该数据源下的所有自定义cell
+ *    2、创建数据连接池，采用多线程处理 cellList_Map 中的自定义cell： 执行sql 并把结果存入values、列属性存入columnTypes, scales
+ *    3、遍历自定义cell对象，将其value按列属性创建Excel单元格格式并赋值填充到指定位置
+ *  
+ * @author daizd
+ * @date 2021年7月10日
+ */
 public class Excel2Excel {
 	
 	
 	private static final Logger log = LoggerFactory.getLogger(Excel2Excel.class);
 	
-//	private POICellStyle cs;
+	private POICellStyle cs;
 	
 	private static String DefaultURL_Name="";
 	
@@ -93,10 +107,12 @@ public class Excel2Excel {
 //	private Map<String,Connection> conn_map = new HashMap<String,Connection>();
 //	private static Connection con_Default;
 
+	/** key为数据库连接  db_urlName  */
 	private Map<String,ArrayList<MyCellValue>> cellList_Map = new HashMap<String,ArrayList<MyCellValue>>();
 	/** 单个库同时支持的最大连接数  INIT.maxThreadNum , suggest 20, good db can be bigger **/
 //	private int taskNum = INIT.maxThreadNum/2;
-	private int taskNum = 2;
+//	private int taskNum = 2;
+	private int taskNum = 30;
 	
 //	/** 每个库同时支持的最大连接数 **/
 //	private Map<String, Semaphore> taskNum_Map = new HashMap<String, Semaphore>();
@@ -133,7 +149,7 @@ public class Excel2Excel {
 //		}else if(dbtype.trim().toLowerCase().equalsIgnoreCase("oracle")){
 //			return getOracleJDBCConnection( url );
 //		}else{
-//			throw new Exception("This db is not support:<"+dbtype+">");
+//			throw new BusinessException("This db is not support:<"+dbtype+">");
 //		}
 //	}
 //
@@ -151,7 +167,7 @@ public class Excel2Excel {
 	 * @throws Exception */
 	public void exchangeExcel( String inputFile, String outputFile, String uploadContentType ) throws Exception{
 		if(!new File(inputFile).exists() ){
-			throw new Exception("input file is not exist!");
+			throw new BusinessException("input file is not exist!");
 		}
 		try{
 			this.exchangeExcel(new File(inputFile), outputFile, uploadContentType);
@@ -179,7 +195,7 @@ public class Excel2Excel {
             System.out.println("The file with the wrong format！");  
         }
         
-//        cs = new POICellStyle(wb);
+        cs = new POICellStyle(wb);
         
         for(int sn=0; sn<wb.getNumberOfSheets(); sn++) {
 //        	HSSFSheet t = new HSSFSheet();
@@ -196,7 +212,7 @@ public class Excel2Excel {
                   String value = cell.getStringCellValue();
                   value = value.trim().replaceAll("  ", " ");
                   
-                  if(this.isSQL(value)){
+                  if(this.isSQL(value)){// 获取自定义sql对象
                 	  String db_urlName = this.getTargetDBURL_Name(value);
                 	  String pureSQL = this.getPureSQL(value);
                 	  
@@ -214,13 +230,14 @@ public class Excel2Excel {
                 			  cv.sql = pureSQL;
                 			  cv.isSql = true;
 
+                			  // 把cell对象放到对应cellList_Map的dbkey中
                 			  ArrayList<MyCellValue> cellList = cellList_Map.containsKey(db_urlName)?
                 					  cellList_Map.get(db_urlName) : new ArrayList<MyCellValue>();
                 			  cellList.add(cv);
                 			  
                 			  cellList_Map.put(db_urlName, cellList);
                 		  }
-                		  else if(db_urlName.trim().toLowerCase().startsWith("oracle"))
+                		  else if(db_urlName.trim().toLowerCase().startsWith("oracle"))// 和上面的代码一样，只是增加对oracle的直接，可与上面的代码合并
                 		  {
 //                			  d = this.exeuteQuery(pureSQL, conn_map.get( db_urlName ));
 //                			  cell.setCellValue(d.doubleValue());
@@ -232,6 +249,7 @@ public class Excel2Excel {
                 			  cv.sql = pureSQL;
                 			  cv.isSql = true;
 
+                			  // 把cell对象放到对应cellList_Map的dbkey中
                 			  ArrayList<MyCellValue> cellList = cellList_Map.containsKey(db_urlName)?
                 					  cellList_Map.get(db_urlName) : new ArrayList<MyCellValue>();
                 			  cellList.add(cv);
@@ -240,7 +258,7 @@ public class Excel2Excel {
                 		  }
                 		  else
                 		  {
-                			  throw new Exception("This url Name is not legal:<"+db_urlName+">");
+                			  throw new BusinessException("This url Name is not legal:<"+db_urlName+">");
                 		  }
 //                		  Date endTime = new Date();
 //                		  long diff = endTime.getTime() - beginTime.getTime();//这样得到的差值是微秒级别
@@ -256,12 +274,12 @@ public class Excel2Excel {
 						System.out.println("########## below sql have problem ########## ");
 						System.out.println(pureSQL);
 						System.out.println("###--above sql position："+sheet.getSheetName() + "  Row " + row.getRowNum()+" (" + cell.getColumnIndex() + ") ");
-//						throw new Exception("There SQL have problem："+sheet.getSheetName() + "  Row " + row.getRowNum()+" (" + cell.getColumnIndex() + ") ");
+//						throw new BusinessException("There SQL have problem："+sheet.getSheetName() + "  Row " + row.getRowNum()+" (" + cell.getColumnIndex() + ") ");
 					  }
-                  }else if(this.isDBDefine(value)){
+                  }else if(this.isDBDefine(value)){// 获取数据   源 url 存入 map
                 	  String[] arr = value.substring(12).trim().split("=\"| ");
                 	  if( arr.length<2 || arr.length>3 ){
-                		  throw new Exception("DB Connection URL define is not legal:"+value);
+                		  throw new BusinessException("DB Connection URL define is not legal:"+value);
                 	  }
                 	  arr[0]=arr[0].trim().toLowerCase();
                 	  String url = arr[1].replaceAll("\"$", "");
@@ -272,17 +290,17 @@ public class Excel2Excel {
                 		  //conn_map.get( db_urlName )
                 	  }else if( arr[0].startsWith("oracle") ){
                 		  if( arr.length!=2 ){
-                    		  throw new Exception("DB Connection URL define is not legal:"+value);
+                    		  throw new BusinessException("DB Connection URL define is not legal:"+value);
                     	  }
 //                		  String[] acct = arr[2].split("\\/");
 //                		  if( acct.length!=2 ){
-//                    		  throw new Exception("DB Connection URL define is not legal:"+value);
+//                    		  throw new BusinessException("DB Connection URL define is not legal:"+value);
 //                    	  }
 //                		  Connection con_Oracle = getJDBCConnection(url, acct[0], acct[1], "Oracle" );
 //                		  Connection con_Oracle = getJDBCConnection(url, "Oracle" );
 //                		  conn_map.put(arr[0], con_Oracle);
                 	  }else{
-                		  throw new Exception("DB Connection URL define is not legal:"+value);
+                		  throw new BusinessException("DB Connection URL define is not legal:"+value);
                 	  }
                 	  if(!haveSetDefault){
                 		  DefaultURL_Name = arr[0];
@@ -304,14 +322,19 @@ public class Excel2Excel {
             }
          }// end of for
         
+        // 将sql 转换为值存入自定义cell对象中
         getSqlValue();
                 
 //        writeExcel();
+		POICellStyle cs  = new POICellStyle(wb);
+		
+        // 遍历自定义cell对象，将其value按列属性创建Excel单元格格式并赋值填充到指定位置
         Set<String> keys = cellList_Map.keySet();
 		Iterator<String> it2 = keys.iterator();
+		
 		while(it2.hasNext()){
 			String urlName = it2.next();
-			
+			// cell 表达式转自定义cell对象中values属性 值， 支持多行多列    
 			ArrayList<MyCellValue> cellList = cellList_Map.get(urlName);
 			
 			for (int i = cellList.size() - 1; i >= 0; i--) {
@@ -322,8 +345,8 @@ public class Excel2Excel {
 			for (MyCellValue cv : cellList) {
 				Sheet ws = wb.getSheet(cv.sheet);
 				
-				for (int row = cv.row; row < cv.row + cv.values.length; row++)
-					for (int col = cv.col; col < cv.col + cv.values[0].length; col++) {
+				for (int row = cv.row; row < cv.row + cv.values.length; row++)//行
+					for (int col = cv.col; col < cv.col + cv.values[0].length; col++) { // 列
 						
 //						cs.initializeRequiredStyle(
 //								cv.columnTypes[row - cv.row][col - cv.col], 
@@ -360,11 +383,17 @@ public class Excel2Excel {
 		POICellUtil.setCellValueT(value, cell, columnType );
 //		cell.setCellValue( String.valueOf( value ) );
 	}
+	/** 
+	 * 将sql 转换为值存入自定义cell对象中 
+	 * 
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	public void getSqlValue() throws Exception {
 		
 		System.out.println("begin execute sql...");
 		
+		/** key为数据库连接 db_urlName */
 		Set<String> keys = cellList_Map.keySet();
 		Iterator<String> it = keys.iterator();
 		
@@ -401,6 +430,7 @@ public class Excel2Excel {
 	}
 
 	/**
+	 * @deprecated
 	 * 
 	 * 判断是否是统计sql
 	 * <p>
@@ -436,9 +466,17 @@ public class Excel2Excel {
 			return false;
 		}else if(value.toLowerCase().startsWith("select ")){
 			return true;
-		}else if(value.toLowerCase().startsWith(MySQL_targetDB_of_SQLprefix.toLowerCase())){
+		}else if(value.toLowerCase().startsWith(MySQL_targetDB_of_SQLprefix.toLowerCase())
+				&& !value.toLowerCase().contains("delete")
+				&& !value.toLowerCase().contains("update")
+				&& !value.toLowerCase().contains("drop")
+				&& !value.toLowerCase().contains("truncate")){
 			return true;
-		}else if(value.toLowerCase().startsWith(Oracle_targetDB_of_SQLprefix.toLowerCase())){
+		}else if(value.toLowerCase().startsWith(Oracle_targetDB_of_SQLprefix.toLowerCase())
+				&& !value.toLowerCase().contains("delete")
+				&& !value.toLowerCase().contains("update")
+				&& !value.toLowerCase().contains("drop")
+				&& !value.toLowerCase().contains("truncate")){
 			return true;
 		}
 		return false;
@@ -515,8 +553,8 @@ public class Excel2Excel {
 	public static void main(String[] args) {
 //		Connection conn = null;
 		try {
-//			String inputFile = "F:\\mysiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#.xlsx";
-//			String outputFile = "F:\\mysiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#_output.xlsx";
+//			String inputFile = "F:\\asiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#.xlsx";
+//			String outputFile = "F:\\asiainfo\\DR4\\connexion report\\OP Migration WS_Connexion Report DR4#_output.xlsx";
 //			String inputFile = "F:\\Java项目\\migration2.0\\测试文档\\OPP Migration Report DR# - Wholesale  V0.2 - test.xlsx";
 //			String outputFile ="F:\\Java项目\\migration2.0\\测试文档\\OPP Migration Report DR# - Wholesale  V0.2 - test1.xlsx";
 			
@@ -525,7 +563,7 @@ public class Excel2Excel {
 			
 //			"G:\\KPI2-sql.xls","G:\\result.xls"
 			
-			//"F:\mysiainfo\DR4\connexion report\OP Migration WS_Connexion Report DR4#.xlsx"
+			//"F:\asiainfo\DR4\connexion report\OP Migration WS_Connexion Report DR4#.xlsx"
 //			conn = getJDBCConnection("localhost", "3306", "tool", "root",
 //					"123");
 //			conn.setAutoCommit(false);
@@ -584,9 +622,16 @@ class SQLRunnable implements Runnable {
 					ResultSet.CONCUR_READ_ONLY);
 			
 	//		System.out.println(Thread.currentThread().getId());
-					
-			stmt.execute();
 
+			Date begin = new Date();
+			stmt.execute();
+			Date end = new Date();
+			
+			long min = ElapsedTimePrinter.printElapsedTime3(begin, end, "("+cv.sheet+")["+cv.row+","+cv.col+"]:"+this.cv.sql);
+			if(min>=1){
+				log.warn("超过1分钟：("+cv.sheet+")["+cv.row+","+cv.col+"]:"+this.cv.sql);
+			}
+			
 			while (true) {
 				
 				int rowCount = stmt.getUpdateCount();
@@ -609,7 +654,7 @@ class SQLRunnable implements Runnable {
 					int row = 0;
 					
 					ResultSetMetaData metaData = rs.getMetaData();
-					while (rs.next()) {					
+					while (rs.next()) {
 						for (int col = 0; col < cols; col++) {
 							cv.values[row][col] = rs.getObject(col + 1);
 //							cv.values[row][col] = rs.getString(col + 1);

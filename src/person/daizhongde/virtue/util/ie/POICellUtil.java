@@ -244,7 +244,7 @@ public class POICellUtil {
 			break;
 		case Types.DATE://91
 		case 93: 
-			cell.setCellStyle( cs.datetime ); //日期
+			cell.setCellStyle( cs.datetimeZF ); //日期
 			if(o == null){
 				cell.setCellValue( "" );
 			}else{
