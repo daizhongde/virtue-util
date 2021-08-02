@@ -1,8 +1,10 @@
 package person.daizhongde.virtue.util.ie;
 
 import java.sql.Types;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
@@ -116,11 +118,37 @@ public class POICellUtil {
 					cell.setCellValue( Double.valueOf( String.valueOf(o) ) );
 				}
 				break;*/
-			case Types.DATE://91
-				cell.setCellValue( (java.sql.Date)o );
+			case Types.DATE://91  如果单元格是Date类型直接用Date对象填充，如果不是使用 yyyy-MM-dd 格式的字符串填充
+//				cell.setCellValue( (java.sql.Date)o );				
+				boolean isDate = false;
+				String fmt = cell.getCellStyle().getDataFormatString();// 有值就认为是date类型的cell
+				
+				isDate = (StringUtils.isNoneBlank(fmt)
+						  && !"General".equalsIgnoreCase(fmt)
+						  && fmt.indexOf("yy")!=-1
+						)?true:false;
+				if( isDate ){
+					cell.setCellValue( (Date)o );
+				}else{
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					cell.setCellValue( sdf.format((Date)o) );
+				}
 				break;
-			case Types.TIMESTAMP: //93
-				cell.setCellValue( (Date)o );
+			case Types.TIMESTAMP: //93   如果单元格是Date类型直接用Date对象填充，如果不是使用 yyyy-MM-dd HH:mm:ss 格式的字符串填充
+//				cell.setCellValue( (Date)o );				
+				boolean isDate2 = false;
+				String fmt2 = cell.getCellStyle().getDataFormatString();// 有值就认为是date类型的cell
+
+				isDate2 = (StringUtils.isNoneBlank(fmt2)
+						  && !"General".equalsIgnoreCase(fmt2)
+						  && fmt2.indexOf("yy")!=-1
+						)?true:false;
+				if( isDate2 ){
+					cell.setCellValue( (Date)o );
+				}else{
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					cell.setCellValue( sdf.format((Date)o) );
+				}
 				break;
 			default : System.out.println("没有对应的列类型！");
 			}

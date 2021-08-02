@@ -4,31 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.Semaphore;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -38,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
-import person.daizhongde.virtue.util.date.ElapsedTimePrinter;
 import person.daizhongde.virtue.util.exception.BusinessException;
 import person.daizhongde.virtue.util.ie.POICellStyle;
 import person.daizhongde.virtue.util.ie.POICellUtil;
@@ -217,16 +202,13 @@ public class Excel2Excel2 {
 		if(null == cell){
 			cell = row0.createCell(col);
 		}
-		if(columnType!=91){
-			POICellUtil.setCellValueT(value, cell, columnType );
-		}else{
-//			cell.setCellType( CellType.NUMERIC );
+		POICellUtil.setCellValueT(value, cell, columnType );
+//		if(columnType!=91){
 //			POICellUtil.setCellValueT(value, cell, columnType );
-//			CellStyle style = cell.getCellStyle();
-			
-			cs.initializeRequiredStyle(columnType, scale);
-			POICellUtil.setCellValueST(value, cell,cs, columnType, scale );
-		}
+//		}else{			
+//			cs.initializeRequiredStyle(columnType, scale);
+//			POICellUtil.setCellValueST(value, cell,cs, columnType, scale );
+//		}
 //		cell.setCellValue( String.valueOf( value ) );
 	}
 	
