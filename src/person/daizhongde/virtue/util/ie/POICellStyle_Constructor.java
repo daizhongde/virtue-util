@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
 /**
  * old class , use POICellStyle instead
  * <p>It will cause file open error alert.
@@ -153,18 +154,24 @@ public class POICellStyle_Constructor {
 		
 		textBB = wb.createCellStyle();
 		textBB.setDataFormat( wb.createDataFormat().getFormat("text"));
-		textBB.setBorderBottom( HSSFCellStyle.BORDER_THIN );
+		// poi 4 以前
+//		textBB.setBorderBottom( HSSFCellStyle.BORDER_THIN );
+		// poi 4 以后
+		textBB.setBorderBottom( BorderStyle.THIN );
+		
 		org.apache.poi.hssf.usermodel.HSSFFont BBF = wb.createFont();//border bottom font
 		BBF.setFontHeightInPoints((short) 12);
 		BBF.setColor( HSSFFont.COLOR_NORMAL  );
-		BBF.setBoldweight( org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD );
+//		BBF.setBoldweight( org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD );
+		BBF.setBold(true);
 		textBB.setFont(BBF);
 		
 		textHeader = wb.createCellStyle();
 		textHeader.setDataFormat( wb.createDataFormat().getFormat("text"));
 		org.apache.poi.hssf.usermodel.HSSFFont headerF = wb.createFont();
 		headerF.setFontHeightInPoints((short) 12);
-		headerF.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+//		headerF.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+		headerF.setBold(true);
 		textHeader.setFont(headerF);
 		
 		
@@ -215,7 +222,10 @@ public class POICellStyle_Constructor {
 		numberNCP10.setDataFormat( wb.createDataFormat().getFormat("0.0000000000;[Red]-0.0000000000"));
 		
 		org.apache.poi.hssf.usermodel.HSSFFont moneyF = wb.createFont();
-		moneyF.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+		// poi 4 以前
+//		moneyF.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+		// poi 4 以后
+		// ???
 		
 		
 		moneyCP0 = wb.createCellStyle();
@@ -353,20 +363,24 @@ public class POICellStyle_Constructor {
 	    // Set font 1 to 12 point type, blue and bold
 	    f1.setFontHeightInPoints((short) 12);
 	    f1.setColor( HSSFFont.COLOR_RED );
-	    f1.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+//	    f1.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
 
 	    // Set font 2 to 10 point type, red and bold
 	    f2.setFontHeightInPoints((short) 10);
 	    f2.setColor( HSSFFont.COLOR_RED );
-	    f2.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+//	    f2.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
 
 	    // Set cell style and formatting
 	    cs1.setFont(f1);
 
-	    cs_text.setBorderBottom(cs_text.BORDER_THIN);
+		// poi 4 以前
+//		cs_text.setBorderBottom(cs_text.BORDER_THIN);
+		// poi 4 以后
+	    cs_text.setBorderBottom( BorderStyle.THIN );
+		
 	    cs_text.setFont(f2);
 	    
-	    cs_date.setBorderBottom(cs_date.BORDER_THIN);
+	    cs_date.setBorderBottom(BorderStyle.THIN);
 	    cs_date.setFont(f2);
 	}
 }

@@ -2,12 +2,25 @@ package person.daizhongde.virtue.util.codec;
 
 import java.util.Base64;
 
-import org.junit.Test;
-
 public class Base64Util {
 
 	private String text = "DZd123456";
 	private String mw = "0kDNwkWYilGe";//"null"
+	
+	public static String encode(String mingWenStr) {
+		String miWenStr = Base64.getEncoder().encodeToString(mingWenStr.getBytes());
+		System.out.println("加密得密文：" + miWenStr);
+
+		return miWenStr;
+	}
+
+	public static String decode(String miWenStr) {
+		byte[] byteArr = Base64.getDecoder().decode(miWenStr);
+		String mingWenStr = new String(byteArr);
+		System.out.println("解密得明文:" + mingWenStr);
+		return mingWenStr;
+	}
+	
 	
 //	@Test
 	public void testJDKBase64() {
@@ -37,7 +50,7 @@ public class Base64Util {
 
 	}
 
-	@Test
+//	@Test
 	public void testDecodeCopoteMailPWD() {
 		//反转
 		StringBuffer sb = new StringBuffer("0kDNwkWYilGe");

@@ -16,6 +16,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -132,11 +133,12 @@ public class HSSFWorkbookUtil4Import {
 				String value = null;
 				
 				switch (cell.getCellType()) {
-					case HSSFCell.CELL_TYPE_FORMULA:
+					case FORMULA:
 						oa_Row[c] = POICellUtil.getCellValueT(evaluator.evaluate(cell), columnTypes[c]);
 						break;
 						
-					case HSSFCell.CELL_TYPE_STRING:
+//					case HSSFCell.CELL_TYPE_STRING:
+					case STRING:
 						if(columnTypes[c] == Types.DATE ){
 							/* 根据前台传来的日期格式将string 转换成 Date  
 							 * default 
@@ -158,7 +160,7 @@ public class HSSFWorkbookUtil4Import {
 							String formatS = DateformatConverter4IE.convertCFG2format(DateOrder, DateDelimiter, TimeDelimiter, 
 									DateTimeOrder, ZeroPaddingDate);
 							
-							oa_Row[c] = DateUtils.Str2Date(cell.getStringCellValue(), formatS );
+							oa_Row[c] = DateUtils.str2Date(cell.getStringCellValue(), formatS );
 							
 						}else if( columnTypes[c] == Types.TIMESTAMP){
 							/* 根据前台传来的日期格式将string 转换成 TIMESTAMP   */
@@ -173,14 +175,14 @@ public class HSSFWorkbookUtil4Import {
 							String formatS = DateformatConverter4IE.convertCFG2format(DateOrder, DateDelimiter, TimeDelimiter, 
 									DateTimeOrder, ZeroPaddingDate);
 							
-							Date date = DateUtils.Str2Date(cell.getStringCellValue(), formatS );
+							Date date = DateUtils.str2Date(cell.getStringCellValue(), formatS );
 							
 							oa_Row[c] = DateUtils.Date2Timestamp(date);;
 						}else{
 							oa_Row[c] = cell.getStringCellValue();
 						}
 						break;
-					case HSSFCell.CELL_TYPE_NUMERIC:
+					case NUMERIC:
 						/* 针对日期的处理，要么excel的column是时间类型，要么字符串符合系统默认的格式  */
 						if(HSSFDateUtil.isCellDateFormatted(cell)){
 							System.out.println("Date Cell: Yes!" );//对于日期的处理待完善。。。。对于工具导出的excel直接导入bug
@@ -190,11 +192,11 @@ public class HSSFWorkbookUtil4Import {
 						}
 						break;
 
-					case HSSFCell.CELL_TYPE_BLANK:
+					case BLANK:
 						oa_Row[c] = null;
 						break;
 						
-					case HSSFCell.CELL_TYPE_BOOLEAN:
+					case BOOLEAN:
 						oa_Row[c] = cell.getBooleanCellValue();
 						break;
 						

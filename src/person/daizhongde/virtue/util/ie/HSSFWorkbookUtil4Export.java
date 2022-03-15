@@ -1,5 +1,6 @@
 package person.daizhongde.virtue.util.ie;
 
+import java.awt.Font;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -258,7 +259,8 @@ public class HSSFWorkbookUtil4Export {
 			org.apache.poi.hssf.usermodel.HSSFFont headerF = wb.createFont();
 			headerF.setFontHeightInPoints((short) 12);
 //			headerF.setBoldweight( org.apache.poi.ss.usermodel.Font.BOLDWEIGHT_BOLD );
-			headerF.setBoldweight( HSSFFont.BOLDWEIGHT_BOLD );
+//			headerF.setBoldweight( HSSFFont.BOLDWEIGHT_BOLD );
+			headerF.setBold(true);
 			
 			textHeader.setFont(headerF);
 			cs.setTextHeader(textHeader);

@@ -1,4 +1,4 @@
-﻿package person.daizhongde.virtue.util.json;
+package person.daizhongde.virtue.util.json;
 
 import java.util.List;
 import java.util.Map;

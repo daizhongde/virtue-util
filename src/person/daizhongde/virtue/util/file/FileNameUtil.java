@@ -2,11 +2,8 @@ package person.daizhongde.virtue.util.file;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import person.daizhongde.virtue.util.character.CharacterConvert;
-import person.daizhongde.virtue.util.collection.MapUtils;
+import java.util.Map;
 
 public class FileNameUtil {
 	/**

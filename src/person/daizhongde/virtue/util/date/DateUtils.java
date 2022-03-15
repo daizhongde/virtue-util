@@ -102,7 +102,7 @@ public class DateUtils {
 	 * @return date
 	 * @throws ParseException 
 	 */
-	public static Date Str2Date( String str, String fmt ) throws ParseException {
+	public static Date str2Date( String str, String fmt ) throws ParseException {
 
 //		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		SimpleDateFormat format = new SimpleDateFormat( fmt );
@@ -115,6 +115,58 @@ public class DateUtils {
 			throw e;
 		}
 		return date;
+	}
+
+	/**
+	 * 字符串转换成日期
+	 * 
+	 * @param str
+	 * @return date
+	 * @throws ParseException 
+	 */
+	public static String str2Str( String str, String srcfmt, String targetfmt ) throws ParseException {
+
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat( srcfmt );
+		
+		Date date = null;
+		try {
+			date = format.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return date2Str(date, targetfmt ) ;
+	}
+	
+	/**
+	 * 字符串转换成日期
+	 * 
+	 * @param str
+	 * @return date
+	 * @throws ParseException 
+	 */
+	public static String date2Str( Date date, String fmt ) throws ParseException {
+
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat( fmt );
+		
+		return format.format(date);
+	}
+	
+	/**
+	 * 字符串转换成日期
+	 * 
+	 * @param str
+	 * @return date
+	 * @throws ParseException 
+	 */
+	public static String date2Str( Calendar date, String fmt ) throws ParseException {
+
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat( fmt );
+		
+		return format.format(new Date(date.getTimeInMillis()));
 	}
 	/**
 	 * 字符串转换成日期
@@ -143,7 +195,7 @@ public class DateUtils {
 	public static Timestamp Date2Timestamp( Date date ) throws ParseException {
 		return new java.sql.Timestamp( date.getTime() );
 	}
-	public static Date Timestamp2Date( Timestamp ts ) {
+	public static Date Timestamp2Date( Timestamp ts ) throws Exception {
 		Date date = new Date();
 		try {
 			date = ts;
@@ -188,18 +240,24 @@ public class DateUtils {
 //		java.sql.Timestamp q_datetime = DateUtils.Str2Timestamp("1900-1-1 00:01",null);
 //		System.out.println("q_datetime:"+q_datetime);
 		
-		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTime(new Date());
-		gc.add(5, 13);
-		gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH),
-				gc.get(Calendar.DATE));
+//		GregorianCalendar gc = new GregorianCalendar();
+//		gc.setTime(new Date());
+//		gc.add(5, 13);
+//		gc.set(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH),
+//				gc.get(Calendar.DATE));
+//		
+//
+//        // 获取当前时间//设置日期格式
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		// new Date()为获取当前系统时间
+//        String nowTime = df.format( new Date(gc.getTimeInMillis()));
+//        System.out.println("nowTime:"+nowTime);
 		
-
-        // 获取当前时间//设置日期格式
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		// new Date()为获取当前系统时间
-        String nowTime = df.format( new Date(gc.getTimeInMillis()));
-        System.out.println("nowTime:"+nowTime);
+		
+		Date date = DateUtils.str2Date("20210627", "yyyyMMdd");
+		String str = DateUtils.date2Str(date, "yyyy-MM-dd");
+//		log.debug("#########  str: {}" , str);
+		System.out.println("#########  str: " +str);
 		
 	}
 }

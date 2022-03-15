@@ -3,6 +3,7 @@ package person.daizhongde.virtue.util.ie;
 import java.sql.Types;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -759,20 +760,23 @@ public class POICellStyle {
 	    // Set font 1 to 12 point type, blue and bold
 	    f1.setFontHeightInPoints((short) 12);
 	    f1.setColor( HSSFFont.COLOR_RED );
-	    f1.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+//	    f1.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+	    f1.setBold(true);
 
 	    // Set font 2 to 10 point type, red and bold
 	    f2.setFontHeightInPoints((short) 10);
 	    f2.setColor( HSSFFont.COLOR_RED );
-	    f2.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+//	    f2.setBoldweight(org.apache.poi.hssf.usermodel.HSSFFont.BOLDWEIGHT_BOLD);
+	    f2.setBold(true);
 
 	    // Set cell style and formatting
 	    cs1.setFont(f1);
 
-	    cs_text.setBorderBottom(cs_text.BORDER_THIN);
+//	    cs_text.setBorderBottom(cs_text.BORDER_THIN);
+//	    cs_text.setBorderBottom( HSSFCellStyle.BORDER_THIN );
 	    cs_text.setFont(f2);
 	    
-	    cs_date.setBorderBottom(cs_date.BORDER_THIN);
+//	    cs_date.setBorderBottom(cs_date.BORDER_THIN);
 	    cs_date.setFont(f2);
 	}
 }

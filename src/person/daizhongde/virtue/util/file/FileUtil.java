@@ -118,6 +118,38 @@ public class FileUtil {
 		}
 		return str.toString();
 	}
+	 /**
+     * InputStreamReader+BufferedReader读取字符串 ， InputStreamReader类是从字节流到字符流的桥梁
+     * 按行读对于要处理的格式化数据是一种读取的好方式 <br>
+     * read by line
+     */
+    public static String read2String(String file, String charset) {
+        int len = 0;
+        StringBuffer str = new StringBuffer("");
+        // File file = new File(FILE_IN);
+        try {
+            FileInputStream is = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader( is, charset );
+            BufferedReader in = new BufferedReader(isr);
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                if (len != 0) // 处理换行符的问题
+                {
+                    str.append(" \r\n" + line);
+                } else {
+                    str.append(line);
+                }
+                len++;
+            }
+            in.close();
+            isr.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str.toString();
+    }
+    
 /**
  * read by byte
  * @param FILE_IN
@@ -259,14 +291,28 @@ public class FileUtil {
 		return byteArrayOutPutStream.toByteArray();// 返回这个输入流的字节数组
 	}
 	 
+	/**
+	 * 
+	 * @Description:  
+	 *    不支持jar中的文件
+	 * 
+	 * @param: @param file
+	 *    eg: config.ini  config.properties   icon/doc.png
+	 * @param: @return      
+	 * @return: File      
+	 * @throws
+	 */
+	public static File getFile(String file){
+		return new File( getFilePath(file) );
+	}
 	
-	public static String getFilePath(String file){
+	public static String getFilePath(String fname){
 			String absPath = "";
 			String classpath =FileUtil.class.getResource("/").getPath();//得到工程名WEB-INF/classes/路径
 			
 			try {
 				classpath = java.net.URLDecoder.decode( classpath,"UTF-8");
-				if( file.startsWith("com/") )
+				if( fname.startsWith("com/") || fname.startsWith("person/") || fname.startsWith("org/") )
 				{
 //					同目录文件夹：classes，m2e-jee，test-classes
 					int index = classpath.indexOf("/test-classes/");
@@ -283,36 +329,36 @@ public class FileUtil {
 						classpath = classpath.substring(1, 
 					    		index==-1 ? classpath.indexOf("/bin/") : index
 					    	);//从路径字符串中取出工程路径
-						if(file.indexOf("authority") != -1){
-							absPath = classpath + "/" + file;
+						if( fname.indexOf("authority") != -1 ){
+							absPath = classpath + "/" + fname;
 					    }else{
-					    	absPath = classpath +"/bin/"+ file;
+					    	absPath = classpath +"/bin/"+ fname;
 					    }
 					}else if( classesIndex != -1 ){
 						classpath = classpath.substring(1, 
 					    		index==-1 ? classpath.indexOf("/classes/") : index
 					    	);//从路径字符串中取出工程路径
-						if(file.indexOf("authority") != -1){
-							absPath = classpath + "/" + file;
+						if( fname.indexOf("authority") != -1){
+							absPath = classpath + "/" + fname;
 					    }else{
-					    	absPath = classpath +"/classes/"+ file;
+					    	absPath = classpath +"/classes/"+ fname;
 					    }
 					}			    
 				}
-				else if( file.startsWith("/WEB-INF/") )
+				else if( fname.startsWith("/WEB-INF/") )
 				{
 					
 //					System.out.println("path:"+path);
 					classpath = classpath.substring(0, classpath.indexOf("/WEB-INF/"));//从路径字符串中取出工程路径
-					absPath = classpath + "/" + file;
+					absPath = classpath + "/" + fname;
 				}
-				else if( file.indexOf("/")==-1 )
+				else if( fname.indexOf("/")==-1 )
 				{
-					absPath = classpath + "/" + file;
+					absPath = classpath + "/" + fname;
 				}
 				else
 				{
-					absPath = file;
+					absPath = fname;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -358,13 +404,21 @@ public class FileUtil {
      * @throws IOException
      */
     public static void write2File(String data, String path ) throws IOException {
+    	write2File( data,  path, false );
+    }
+    /**
+     * String 写入信息.
+     * 
+     * @throws IOException
+     */
+    public static void write2File(String data, String path, boolean append ) throws IOException {
 //    	StreamReader sr = new StreamReader( 你的Stream );
     	File file = new File(path);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
 		// true = append file
-		FileWriter fileWritter = new FileWriter(path, true);
+		FileWriter fileWritter = new FileWriter(path, append);
 		BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
 		bufferWritter.write(data);
 		bufferWritter.close();

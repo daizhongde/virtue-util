@@ -11,18 +11,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
  
- 
-import org.apache.poi.POIXMLDocument;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.model.FieldsDocumentPart;
 import org.apache.poi.hwpf.usermodel.Field;
 import org.apache.poi.hwpf.usermodel.Fields;
 import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.Range;
+import org.apache.poi.ooxml.POIXMLDocument;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.wp.usermodel.CharacterRun;
 import org.apache.poi.xwpf.usermodel.PositionInParagraph;
-import org.apache.poi.xwpf.usermodel.TextSegement;
+import org.apache.poi.xwpf.usermodel.TextSegment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -120,7 +119,7 @@ public class ReadAndWriteDoc {
     	            String find = s;
     	            String replValue = String.valueOf( map.get(s) );
     		            
-    				TextSegement found = tmp.searchText(find,
+    				TextSegment found = tmp.searchText(find,
     	                    new PositionInParagraph());
     	            if (found != null) {
     	                // 判断查找内容是否在同一个Run标签中

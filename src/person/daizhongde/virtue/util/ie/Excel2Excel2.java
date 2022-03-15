@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -130,7 +131,8 @@ public class Excel2Excel2 {
                
                for(Cell cell : row) {
             	  
-            	  if(cell.getCellType() != HSSFCell.CELL_TYPE_STRING){
+//            	  if(cell.getCellType() != HSSFCell.CELL_TYPE_STRING){
+                  if(cell.getCellType() != CellType.STRING ){
             		  continue;
             	  }
                   String value = cell.getStringCellValue();
@@ -193,10 +195,19 @@ public class Excel2Excel2 {
 //		Cell cell = sht.getRow(row).getCell(col);
 //		cell.setCellValue( null==value? -1 : value.doubleValue() );
 //	}
-	public void setContent(Sheet sht, int row, int col, Object value, int columnType, int scale ) {
+	public void setContent(Sheet sht, int row, int col, Object value, int columnType, int scale 
+			) {
+		this.setContent( sht,  row,  col,  value,  columnType,  scale , 
+				(short)-1 );
+	}
+	public void setContent(Sheet sht, int row, int col, Object value, int columnType, int scale , 
+			short height) {
 		Row row0 = sht.getRow(row);
 		if(null == row0){
 			row0 = sht.createRow(row);
+			if(height>0){
+				row0.setHeight(height);
+			}
 		}
 		Cell cell = row0.getCell(col);
 		if(null == cell){

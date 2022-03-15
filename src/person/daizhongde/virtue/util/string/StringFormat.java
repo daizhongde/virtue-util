@@ -3,8 +3,6 @@ package person.daizhongde.virtue.util.string;
 import java.util.Date;
 import java.util.Locale;
 
-import org.junit.Test;
-
 public class StringFormat {
 /**
  * https://blog.csdn.net/lonely_fireworks/article/details/7962171
@@ -33,7 +31,7 @@ public class StringFormat {
 	 * 搭配转换符的标志，如图所示。
 	 * @param args
 	 */
-	@Test
+//	@Test
 	public void main2( ) {
 	    String str=null;
 	    //$使用

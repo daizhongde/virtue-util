@@ -1,4 +1,4 @@
-﻿package person.daizhongde.virtue.util.math;
+package person.daizhongde.virtue.util.math;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

@@ -1,6 +1,5 @@
 package person.daizhongde.virtue.util.word;
 
-import org.apache.poi.POIXMLDocument;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.model.ListTables;
 import org.apache.poi.hwpf.usermodel.CharacterRun;

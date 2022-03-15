@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.springframework.cglib.beans.BeanMap;
 
-import jersey.repackaged.com.google.common.collect.Lists;
-import jersey.repackaged.com.google.common.collect.Maps;
+//import jersey.repackaged.com.google.common.collect.Lists;
+//import jersey.repackaged.com.google.common.collect.Maps;
 
-//import com.google.common.collect.Lists;
-//import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 //
 //import net.sf.cglib.beans.BeanMap;
 /**

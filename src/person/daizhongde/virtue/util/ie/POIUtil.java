@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFPatriarch;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.hssf.util.HSSFColor;
  
@@ -151,24 +152,47 @@ public final class POIUtil {
             }
         }
          
-        //处理单元格内容
+        //处理单元格内容 3.17
+//        switch (sourceCell.getCellType()) {
+//        case HSSFCell.CELL_TYPE_STRING:
+//            targetCell.setCellValue(sourceCell.getRichStringCellValue());
+//            break;
+//        case HSSFCell.CELL_TYPE_NUMERIC:
+//            targetCell.setCellValue(sourceCell.getNumericCellValue());
+//            break;
+//        case HSSFCell.CELL_TYPE_BLANK:
+//            targetCell.setCellType(HSSFCell.CELL_TYPE_BLANK);
+//            break;
+//        case HSSFCell.CELL_TYPE_BOOLEAN:
+//            targetCell.setCellValue(sourceCell.getBooleanCellValue());
+//            break;
+//        case HSSFCell.CELL_TYPE_ERROR:
+//            targetCell.setCellErrorValue(sourceCell.getErrorCellValue());
+//            break;
+//        case HSSFCell.CELL_TYPE_FORMULA:
+//            targetCell.setCellFormula(sourceCell.getCellFormula());
+//            break;
+//        default:
+//            break;
+//        }
+        //处理单元格内容 4.1.1
         switch (sourceCell.getCellType()) {
-        case HSSFCell.CELL_TYPE_STRING:
+        case STRING:
             targetCell.setCellValue(sourceCell.getRichStringCellValue());
             break;
-        case HSSFCell.CELL_TYPE_NUMERIC:
+        case NUMERIC:
             targetCell.setCellValue(sourceCell.getNumericCellValue());
             break;
-        case HSSFCell.CELL_TYPE_BLANK:
-            targetCell.setCellType(HSSFCell.CELL_TYPE_BLANK);
+        case BLANK:
+            targetCell.setCellType(CellType.BLANK);
             break;
-        case HSSFCell.CELL_TYPE_BOOLEAN:
+        case BOOLEAN:
             targetCell.setCellValue(sourceCell.getBooleanCellValue());
             break;
-        case HSSFCell.CELL_TYPE_ERROR:
+        case ERROR:
             targetCell.setCellErrorValue(sourceCell.getErrorCellValue());
             break;
-        case HSSFCell.CELL_TYPE_FORMULA:
+        case FORMULA:
             targetCell.setCellFormula(sourceCell.getCellFormula());
             break;
         default:
@@ -267,9 +291,12 @@ public final class POIUtil {
         try {
             hssfColor = palette.findColor(rgb[0], rgb[1], rgb[2]);
             if (hssfColor == null) {
-                palette.setColorAtIndex(HSSFColor.PINK.index, rgb[0], rgb[1],
-                        rgb[2]);
-                hssfColor = palette.getColor(HSSFColor.PINK.index);
+//            	// poi 4.1之前采用的是枚举类型，setColor(HSSFColor.RED.index);
+//                palette.setColorAtIndex(HSSFColor..PINK.index, rgb[0], rgb[1], rgb[2]);
+//                hssfColor = palette.getColor(HSSFColor.PINK.index);
+                // poi 4.1之后采用的是枚举类型，setColor(HSSFColor.HSSFColorPredefined.RED.getIndex());
+                palette.setColorAtIndex(HSSFColor.HSSFColorPredefined.PINK.getIndex(), rgb[0], rgb[1], rgb[2]);
+                hssfColor = palette.getColor(HSSFColor.HSSFColorPredefined.PINK.getIndex());
             }
         } catch (Exception e) {
             e.printStackTrace();

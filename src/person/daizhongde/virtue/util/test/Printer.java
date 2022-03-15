@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 /**
  * 打印map、list、array、vector,Enumeration, collection等集合数据
  * @author d144574
@@ -91,12 +94,14 @@ public class Printer {
 //		if ( o.getClass().isArray() ){
 		try
 		{
-			System.out.println( "JSONArray:\n"+net.sf.json.JSONArray.fromObject(o).toString() );
+//			System.out.println( "JSONArray:\n"+net.sf.json.JSONArray.fromObject(o).toString() );
+			System.out.println( "JSONArray:\n"+ JSONArray.toJSONString(o)  );
 		}
 		catch(Exception e)
 		{
 			try{
-				System.out.println( "JSONObject:\n"+net.sf.json.JSONObject.fromObject(o).toString() );
+//				System.out.println( "JSONObject:\n"+net.sf.json.JSONObject.fromObject(o).toString() );
+				System.out.println( "JSONObject:\n"+ JSONObject.toJSONString(o) );
 			}
 			catch(Exception e2)
 			{
