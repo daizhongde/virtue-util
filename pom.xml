@@ -7,7 +7,7 @@
   <description>virtue_util support jdk1.7+</description>
   <url>http://maven.apache.org</url>
   
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     
       <properties>
         <JDK.version>1.8</JDK.version>

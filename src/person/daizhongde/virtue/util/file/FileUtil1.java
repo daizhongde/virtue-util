@@ -382,7 +382,7 @@ public class FileUtil1 {
 		// TODO Auto-generated method stub
 		FileUtil1 util = new FileUtil1();
 //		util.readFile("com/mysoftstone/mq/mdm/xml4test/T_GB_ORGANIZATION.xml");/
-		String s = FileUtil1.read2String2("C:/Users/daizd/Desktop/ssh-lib_20161108.txt");
+		String s = FileUtil1.read2String2("D:/daizd/Desktop/Dzdxxx137!.txt");
 		String[] a = s.split("\r\n");
 		List<String> l = Arrays.asList(a);
 //		SortedSet set = new SortedSet(l);

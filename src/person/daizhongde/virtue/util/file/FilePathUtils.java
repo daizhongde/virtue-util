@@ -1,5 +1,7 @@
 package person.daizhongde.virtue.util.file;
 
+import java.io.File;
+
 public class FilePathUtils {
 
 	/**
@@ -8,12 +10,17 @@ public class FilePathUtils {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		FilePathUtils tt = new FilePathUtils();
-		try {
-			System.out.println("path:"+tt.getWebRoot());
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			System.out.println("path:"+tt.getWebRoot());
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+		File f = new File("D:/daizd/Desktop/Dzdxxx137!.txt");
+		System.out.println("path:"+f.getPath());
+		System.out.println("parent:"+f.getParent());
+		
 	}
 
 	public String getWebClassesPath() {

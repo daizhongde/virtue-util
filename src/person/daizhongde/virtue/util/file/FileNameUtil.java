@@ -231,10 +231,36 @@ public class FileNameUtil {
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		FileNameUtil u = new FileNameUtil();
-		String url = "http://im1.shutterfly.com/media/47a0db05b3127ccefa65756a409c00000030O10AYsXDNi3aM2YPbz4M/cC/f%3D0/ps%3D50/r%3D1/rx%3D550/ry%3D400/";
-		String[] arr = {"'s","/cC/f"};
-		String r = u.cvUrl2legalFilename(url, arr);
-		System.out.println("r:"+r);
+//		String url = "http://im1.shutterfly.com/media/47a0db05b3127ccefa65756a409c00000030O10AYsXDNi3aM2YPbz4M/cC/f%3D0/ps%3D50/r%3D1/rx%3D550/ry%3D400/";
+//		String[] arr = {"'s","/cC/f"};
+//		String r = u.cvUrl2legalFilename(url, arr);
+		String path = "D:\\java项目\\docStory转xlsUS\\测试模板\\正式测试\\戴忠德202204\\Story需求文档202204-dzd2.docx";
+		File f = new File(path);
+		String a= f.getAbsolutePath();
+		String b= f.getCanonicalPath();
+		String c= f.getName();
+		String d= f.getParent();
+		String e= f.getPath();
+		String g= f.getParentFile().getAbsolutePath();
+		
+		
+		
+		/*
+		 * 
+		 * a:D:\java项目\docStory转xlsUS\测试模板\正式测试\戴忠德202204\Story需求文档202204-dzd2.docx
+b:D:\java项目\docStory转xlsUS\测试模板\正式测试\戴忠德202204\Story需求文档202204-dzd2.docx
+c:Story需求文档202204-dzd2.docx
+d:D:\java项目\docStory转xlsUS\测试模板\正式测试\戴忠德202204
+e:D:\java项目\docStory转xlsUS\测试模板\正式测试\戴忠德202204\Story需求文档202204-dzd2.docx
+g:D:\java项目\docStory转xlsUS\测试模板\正式测试\戴忠德202204
+
+		 */
+		System.out.println("a:"+a);
+		System.out.println("b:"+b);
+		System.out.println("c:"+c);
+		System.out.println("d:"+d);
+		System.out.println("e:"+e);
+		System.out.println("g:"+g);
 
 		
 	}
