@@ -34,7 +34,7 @@
 			5.2.10.Final(1.8.0-121)
 		<hibernate.version>5.2.10.Final</hibernate.version>-->
         
-        <jsoup.version>1.8.3</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <json-lib.version>2.4</json-lib.version>
         <jackson.version>2.9.5</jackson.version>
         <fastjson.version>1.2.47</fastjson.version>
